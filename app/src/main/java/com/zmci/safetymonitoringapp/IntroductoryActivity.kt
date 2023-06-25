@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.ImageView
-import com.airbnb.lottie.LottieAnimationView
 
 class IntroductoryActivity : AppCompatActivity() {
 
@@ -20,7 +19,7 @@ class IntroductoryActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         Handler().postDelayed({
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
             finish()
         },3000)

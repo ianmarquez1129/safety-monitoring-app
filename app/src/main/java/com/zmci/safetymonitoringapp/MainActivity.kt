@@ -57,6 +57,21 @@ class MainActivity : AppCompatActivity() {
                         val animationDrawable = relativeLayout.background as AnimationDrawable
                         addAnimation(animationDrawable)
                     }
+                    3 -> {
+                        relativeLayout.setBackgroundResource(R.drawable.gradient_animation123)
+                        val animationDrawable = relativeLayout.background as AnimationDrawable
+                        addAnimation(animationDrawable)
+                    }
+                    4 -> {
+                        relativeLayout.setBackgroundResource(R.drawable.gradient_animation456)
+                        val animationDrawable = relativeLayout.background as AnimationDrawable
+                        addAnimation(animationDrawable)
+                    }
+                    5 -> {
+                        relativeLayout.setBackgroundResource(R.drawable.gradient_animation789)
+                        val animationDrawable = relativeLayout.background as AnimationDrawable
+                        addAnimation(animationDrawable)
+                    }
                     else -> {
                         relativeLayout.setBackgroundResource(R.drawable.gradient_animation123)
                         val animationDrawable = relativeLayout.background as AnimationDrawable

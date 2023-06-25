@@ -10,4 +10,6 @@
     //indicator color
     <color name="inactive">#C4C4C4</color>
     <color name="active">#50C2C9</color>
+
+    <color name="green">#068251</color>
 </resources>
