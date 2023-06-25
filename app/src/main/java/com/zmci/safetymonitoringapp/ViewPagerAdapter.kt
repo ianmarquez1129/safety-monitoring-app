@@ -13,7 +13,7 @@ class ViewPagerAdapter(val context: Context) : PagerAdapter() {
 
     var layoutInflater: LayoutInflater? = null
 
-    // arrays of image, heading, descriptio
+    // arrays of image, heading, description
     val imgArray = arrayOf(
         R.drawable.undraw_cloud_sync_re_02p1,
         R.drawable.undraw_dashboard_re_3b76,
