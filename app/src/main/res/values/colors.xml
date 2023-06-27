@@ -19,4 +19,6 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="fragment_bg">#F2F2F2</color>
+    <color name="warm_black">#002626</color>
 </resources>
