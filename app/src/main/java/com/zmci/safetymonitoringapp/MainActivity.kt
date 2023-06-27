@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnSkip = findViewById<Button>(R.id.btnSkip)
         btnSkip.setOnClickListener {
-            val i = Intent(this,MainActivity2::class.java)
+            val i = Intent(this,DashboardActivity::class.java)
             startActivity(i)
             finish()
         }

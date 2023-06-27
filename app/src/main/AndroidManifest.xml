@@ -30,12 +30,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity2"
+            android:name=".DashboardActivity"
+            android:theme="@style/Theme.BottomNavigation"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
-
+            android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
