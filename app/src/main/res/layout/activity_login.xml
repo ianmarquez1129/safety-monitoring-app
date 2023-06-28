@@ -44,13 +44,13 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="Username"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="20sp"/>
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="18sp"
@@ -60,7 +60,7 @@
             android:ems="10"
             android:background="@drawable/edittext_background"
             android:inputType="text"
-            android:hint="Enter your Email" />
+            android:hint="Enter your Username" />
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
             android:textSize="20sp"/>
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="18sp"

@@ -55,4 +55,9 @@ dependencies {
     //ui materials using lottie
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    // Amplify core dependency
+    implementation 'com.amplifyframework:core:2.8.4'
+    implementation 'com.amplifyframework:aws-auth-cognito:2.8.4'
+
 }
