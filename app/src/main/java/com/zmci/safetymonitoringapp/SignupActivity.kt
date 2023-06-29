@@ -51,7 +51,7 @@ class SignupActivity : AppCompatActivity() {
                             Snackbar.make(
                                 binding.root,
                                 "Verify your account",
-                                Snackbar.LENGTH_SHORT
+                                Snackbar.LENGTH_LONG
                             ).show()
                             val i = Intent(this, ConfirmActivity::class.java)
                             i.putExtra("username", registerUsername.text.toString())

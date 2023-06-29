@@ -31,6 +31,12 @@ class LoginActivity : AppCompatActivity() {
             startActivity(i)
         }
 
+        val tvRecoverPW = findViewById<TextView>(R.id.tvRecoverPW)
+        tvRecoverPW.setOnClickListener {
+            val i = Intent(this, ResetPasswordActivity::class.java)
+            startActivity(i)
+        }
+
         buttonLogin = findViewById(R.id.buttonLogin)
         username = findViewById(R.id.editTextUsername)
         password = findViewById(R.id.editTextPassword)
@@ -49,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                         if (result.isSignedIn) {
                             Log.i("AuthQuickstart", "Sign in succeeded")
                             buttonLogin.hideLoading()
-                            Snackbar.make(binding.root, "Login success", Snackbar.LENGTH_SHORT)
+                            Snackbar.make(binding.root, "Login success", Snackbar.LENGTH_LONG)
                                 .show()
                             val i = Intent(this, MainActivity::class.java)
                             i.putExtra("username", username.text.toString())

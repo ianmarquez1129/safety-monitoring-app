@@ -86,11 +86,11 @@
             android:hint="Enter your Password" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvRecoverPW"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#707070"
-            android:text="Don't Remember Password? Recover It"
+            android:text="Don't Remember Password? Reset It"
             android:textAlignment="center"
             android:layout_marginTop="32dp"/>
 

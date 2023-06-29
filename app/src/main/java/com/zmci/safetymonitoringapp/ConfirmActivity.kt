@@ -29,6 +29,7 @@ class ConfirmActivity : AppCompatActivity() {
         button.setOnClickListener {
             button.showLoading()
             if (editText.text.toString().isEmpty()){
+                button.hideLoading()
                 Snackbar.make(
                     binding.root,
                     "Fill out empty fields",
@@ -44,7 +45,7 @@ class ConfirmActivity : AppCompatActivity() {
                             Snackbar.make(
                                 binding.root,
                                 "Account was successfully verified",
-                                Snackbar.LENGTH_SHORT
+                                Snackbar.LENGTH_LONG
                             ).show()
                             val i = Intent(this, LoginActivity::class.java)
                             startActivity(i)
