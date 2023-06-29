@@ -94,17 +94,23 @@
             android:textAlignment="center"
             android:layout_marginTop="32dp"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.kusu.loadingbutton.LoadingButton
             android:id="@+id/buttonLogin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:background="@drawable/button_background"
-            style="@android:style/Widget.Button"
+            android:text="Login"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            style="@android:style/Widget.Button"
             android:textStyle="bold"
-            android:text="Login" />
+            android:textSize="25sp"
+            android:background="@drawable/button_background"
+            app:lb_buttonColor="@color/green"
+            app:lb_isShadowEnable="true"
+            app:lb_isCircular="true"
+            app:lb_loaderColor="@color/white"
+            app:lb_shadowColor="@color/warm_black"
+            app:lb_shadowHeight="5dp" />
 
         <TextView
             android:id="@+id/textView7"

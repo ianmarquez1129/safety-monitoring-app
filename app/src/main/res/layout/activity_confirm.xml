@@ -40,41 +40,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_info"/>
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textViewNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Verification Code"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:text="@string/verification_note"
+                android:textColor="#808080"
+                android:textSize="14sp"
+                android:textStyle="italic" />
 
-            <EditText
-                android:id="@+id/verificationCode"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/edittext_background"
-                android:ems="10"
-                android:hint="Verification code send to email"
-                android:inputType="text"
-                android:padding="12dp"
-                android:textColor="#707070"
-                android:textSize="18sp" />
+        </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buttonVerify"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/button_background"
-                style="@android:style/Widget.Button"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:text="Verify" />
+
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Verification Code"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/verificationCode"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Verification code send to email"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="#707070"
+            android:textSize="18sp" />
+
+        <com.kusu.loadingbutton.LoadingButton
+            android:id="@+id/buttonVerify"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:text="Verify"
+            android:textColor="@color/white"
+            style="@android:style/Widget.Button"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:background="@drawable/button_background"
+            app:lb_buttonColor="@color/green"
+            app:lb_isShadowEnable="true"
+            app:lb_isCircular="true"
+            app:lb_loaderColor="@color/white"
+            app:lb_shadowColor="@color/warm_black"
+            app:lb_shadowHeight="5dp" />
 
     </LinearLayout>
 

@@ -60,4 +60,7 @@ dependencies {
     implementation 'com.amplifyframework:core:2.8.4'
     implementation 'com.amplifyframework:aws-auth-cognito:2.8.4'
 
+    //Loading button
+    implementation 'com.github.koushikcse:LoadingButton:1.7'
+
 }
