@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.zmci.safetymonitoringapp.home.HomeFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_add_camera"
+            app:destination="@id/fragment_add_camera" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_logs"
@@ -22,4 +26,47 @@
         android:name="com.zmci.safetymonitoringapp.about.AboutFragment"
         android:label="@string/about"
         tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/fragment_add_camera"
+        android:name="com.zmci.safetymonitoringapp.home.camera.AddCameraFragment"
+        android:label="Add Camera"
+        tools:layout="@layout/fragment_add_camera" >
+        <action
+            android:id="@+id/action_fragment_add_camera_to_fragment_connect_camera"
+            app:destination="@id/fragment_connect_camera" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_connect_camera"
+        android:name="com.zmci.safetymonitoringapp.home.camera.ConnectCameraFragment"
+        android:label="Connect Camera"
+        tools:layout="@layout/fragment_connect_camera" >
+        <action
+            android:id="@+id/action_fragment_connect_camera_to_fragment_wifi"
+            app:destination="@id/fragment_wifi" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_wifi"
+        android:name="com.zmci.safetymonitoringapp.home.camera.WifiFragment"
+        android:label="Set WiFi"
+        tools:layout="@layout/fragment_wifi" >
+        <action
+            android:id="@+id/action_fragment_wifi_to_fragment_camera_credentials"
+            app:destination="@id/fragment_camera_credentials" />
+        <action
+            android:id="@+id/action_fragment_wifi_to_fragment_connect_camera"
+            app:destination="@id/fragment_connect_camera" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_camera_credentials"
+        android:name="com.zmci.safetymonitoringapp.home.camera.CameraCredentialsFragment"
+        android:label="Device Credentials"
+        tools:layout="@layout/fragment_camera_credentials" >
+        <action
+            android:id="@+id/action_fragment_camera_credentials_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

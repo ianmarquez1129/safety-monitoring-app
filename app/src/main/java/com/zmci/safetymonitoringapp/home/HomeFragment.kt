@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignOutOptions
 import com.amplifyframework.core.Amplify
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.kusu.loadingbutton.LoadingButton
 import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.LoginActivity
 import com.zmci.safetymonitoringapp.R
@@ -46,6 +48,7 @@ class HomeFragment : Fragment() {
                     is AWSCognitoAuthSignOutResult.CompleteSignOut -> {
                         val i = Intent(this.context,LoginActivity::class.java)
                         startActivity(i)
+                        activity?.finish()
                     }
                     is AWSCognitoAuthSignOutResult.PartialSignOut -> {
                         // handle partial sign out
@@ -55,6 +58,11 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        val addingBtn = view.findViewById<FloatingActionButton>(R.id.addingBtn)
+        addingBtn.setOnClickListener{
+            view.findNavController().navigate(R.id.action_navigation_home_to_fragment_add_camera)
         }
     }
 

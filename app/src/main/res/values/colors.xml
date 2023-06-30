@@ -21,4 +21,5 @@
     <color name="teal_700">#FF018786</color>
     <color name="fragment_bg">#F2F2F2</color>
     <color name="warm_black">#002626</color>
+    <color name="dark_gray">#5a5a5a</color>
 </resources>
