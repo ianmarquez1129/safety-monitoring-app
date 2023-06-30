@@ -2,18 +2,16 @@ package com.zmci.safetymonitoringapp.home
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignOutOptions
 import com.amplifyframework.core.Amplify
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.kusu.loadingbutton.LoadingButton
-import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.LoginActivity
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.databinding.FragmentHomeBinding

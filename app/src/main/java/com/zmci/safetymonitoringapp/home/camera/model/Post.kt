@@ -1,4 +1,5 @@
 package com.zmci.safetymonitoringapp.home.camera.model
-
-class Post {
-}
+data class Post (
+    val ssid: String,
+    val password: String
+)

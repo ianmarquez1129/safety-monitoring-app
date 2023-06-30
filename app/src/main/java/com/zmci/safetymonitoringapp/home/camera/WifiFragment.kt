@@ -2,25 +2,30 @@ package com.zmci.safetymonitoringapp.home.camera
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.kusu.loadingbutton.LoadingButton
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.databinding.FragmentWifiBinding
+import com.zmci.safetymonitoringapp.home.camera.model.Post
+import com.zmci.safetymonitoringapp.home.camera.repository.Repository
 
 class WifiFragment : Fragment() {
 
     private var _binding : FragmentWifiBinding? = null
     private val binding by lazy { _binding!! }
 
-    private val viewModel : WifiViewModel by viewModels()
+    private lateinit var viewModel : WifiViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,14 +46,33 @@ class WifiFragment : Fragment() {
 
         buttonPost.setOnClickListener {
             buttonPost.showLoading()
-            if (networkSSID.text.toString().isEmpty() || networkPassword.text.toString().isEmpty())
+            if (networkSSID.text.toString().isEmpty())
             {
                 buttonPost.hideLoading()
                 Snackbar.make(binding.root, "Fill out empty fields", Snackbar.LENGTH_SHORT).show()
             } else {
                 // Do POST request here
-                // if success go to add camera credentials
-                // else snackbar failed
+                try {
+                    val repository = Repository()
+                    val viewModelFactory = WifiViewModelFactory(repository)
+                    viewModel =
+                        ViewModelProvider(this, viewModelFactory)[WifiViewModel::class.java]
+                    val wifiCredentials = Post(networkSSID.text.toString(),networkPassword.text.toString())
+                    viewModel.pushPost(wifiCredentials)
+                    viewModel.myResponse.observe(this.viewLifecycleOwner, Observer { response ->
+                        if (response.isSuccessful) {
+                            Log.d("Main", response.body().toString())
+                            Log.d("Main", response.code().toString())
+                            Log.d("Main", response.message())
+                            buttonPost.hideLoading()
+                        } else {
+                            Toast.makeText(activity, response.code(), Toast.LENGTH_SHORT).show()
+                            buttonPost.hideLoading()
+                        }
+                    })
+                } catch (e:Exception){
+                    e.printStackTrace()
+                }
                 statusLED()
 
             }
