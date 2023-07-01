@@ -3,30 +3,38 @@ package com.zmci.safetymonitoringapp.home.camera
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.kusu.loadingbutton.LoadingButton
 import com.zmci.safetymonitoringapp.DashboardActivity
 import com.zmci.safetymonitoringapp.R
+import com.zmci.safetymonitoringapp.database.DatabaseHelper
 import com.zmci.safetymonitoringapp.databinding.FragmentCameraCredentialsBinding
+import com.zmci.safetymonitoringapp.home.detection.model.CameraData
 
 class CameraCredentialsFragment : Fragment() {
 
     private var _binding : FragmentCameraCredentialsBinding? = null
     private val binding by lazy { _binding!! }
 
-    private val viewModel : CameraCredentialsViewModel by viewModels()
+    companion object {
+        lateinit var databaseHelper: DatabaseHelper
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        databaseHelper = DatabaseHelper(this.requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCameraCredentialsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -44,7 +52,13 @@ class CameraCredentialsFragment : Fragment() {
                 buttonCreate.hideLoading()
                 Snackbar.make(binding.root, "Fill out empty fields", Snackbar.LENGTH_SHORT).show()
             } else {
-                // set mqtt
+                // set mqtt and add credentials to database
+                val camera = CameraData()
+                camera.cameraName = deviceName.text.toString()
+                camera.MQTT_TOPIC = deviceUniqueID.text.toString()
+                camera.MQTT_CLIENT_ID = java.util.UUID.randomUUID().toString()
+                databaseHelper.addCamera(this.requireContext(), camera)
+
                 confirmDeviceCreated()
             }
         }

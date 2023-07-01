@@ -5,10 +5,11 @@ import retrofit2.Response
 import retrofit2.http.*
 interface WifiApi {
 
-    @GET("/")
+    // for testing change '/' to /posts/1
+    @GET("/posts/1")
     suspend fun getPost(): Response<Post>
 
-    @POST("/")
+    @POST("posts/1")
     suspend fun pushPost(
         @Body post: Post
     ): Response<Post>

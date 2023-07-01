@@ -20,12 +20,12 @@ class ConnectCameraFragment : Fragment() {
     private var _binding : FragmentConnectCameraBinding? = null
     private val binding by lazy { _binding!! }
 
-    private lateinit var viewModel : WifiViewModel
+    private lateinit var viewModel : ConnectCameraViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentConnectCameraBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,7 +40,7 @@ class ConnectCameraFragment : Fragment() {
                 val repository = Repository()
                 val viewModelFactory = ConnectCameraViewModelFactory(repository)
                 viewModel =
-                    ViewModelProvider(this, viewModelFactory)[WifiViewModel::class.java]
+                    ViewModelProvider(this, viewModelFactory)[ConnectCameraViewModel::class.java]
                 viewModel.getPost()
                 viewModel.myResponse.observe(this.viewLifecycleOwner, Observer { response ->
                     if (response.isSuccessful) {

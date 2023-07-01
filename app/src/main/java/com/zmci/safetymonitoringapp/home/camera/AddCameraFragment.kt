@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.kusu.loadingbutton.LoadingButton
 import com.zmci.safetymonitoringapp.R
@@ -16,12 +15,10 @@ class AddCameraFragment : Fragment() {
     private var _binding : FragmentAddCameraBinding? = null
     private val binding by lazy { _binding!! }
 
-    private val viewModel : AddCameraViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAddCameraBinding.inflate(inflater,container,false)
         return binding.root
