@@ -12,6 +12,8 @@
     <color name="active">#50C2C9</color>
 
     <color name="green">#068251</color>
+    <color name="red">#FF0000</color>
+    <color name="dark_red">#8B0000</color>
 
     //Bottom navigation
     <color name="purple_200">#FFBB86FC</color>
@@ -22,4 +24,16 @@
     <color name="fragment_bg">#F2F2F2</color>
     <color name="warm_black">#002626</color>
     <color name="dark_gray">#5a5a5a</color>
+
+    //PPE
+    <color name="helmet">#FF0000</color>
+    <color name="no_helmet">#FFA500</color>
+    <color name="glasses">#FFFF00</color>
+    <color name="no_glasses">#00FF00</color>
+    <color name="vest">#26D07C</color>
+    <color name="no_vest">#00FFFF</color>
+    <color name="gloves">#007FFF</color>
+    <color name="no_gloves">#0000FF</color>
+    <color name="boots">#800080</color>
+    <color name="no_boots">#FF00FF</color>
 </resources>

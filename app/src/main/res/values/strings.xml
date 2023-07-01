@@ -10,4 +10,14 @@
     <string name="confirm_reset_password_note">Confirmation code has been sent to your registered email. Please enter the confirmation code and a new strong password.</string>
     <string name="power_up_check_the_led"><![CDATA[Power Up & Check the LED]]></string>
     <string name="connect_to_the_device">Connect to the Device</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="camera_details">Camera Details</string>
+    <string name="person">Person</string>
+    <string name="detected_ppe">Detected PPE</string>
+    <string name="details">Details</string>
+    <string name="detection_client">Detection Client</string>
+    <string name="view_logs">View logs</string>
+    <string name="description_zoom_touch_close">Expanded Image</string>
+    <string name="log_details">Log Details</string>
+    <string name="camera_name">Camera Name</string>
 </resources>
