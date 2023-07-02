@@ -15,24 +15,30 @@ class ViewPagerAdapter(val context: Context) : PagerAdapter() {
 
     // arrays of image, heading, description
     val imgArray = arrayOf(
-        R.drawable.undraw_cloud_sync_re_02p1,
-        R.drawable.undraw_dashboard_re_3b76,
-        R.drawable.undraw_organize_photos_re_ogcy,
-        R.drawable.undraw_personal_data_re_ihde
+        R.drawable.howto1,
+        R.drawable.howto2,
+        R.drawable.howto3,
+        R.drawable.howto4,
+        R.drawable.howto5,
+        R.drawable.undraw_organize_photos,
     )
 
     val titleArray = arrayOf(
-        "Cloud",
-        "Dashboard",
-        "Organize",
-        "Personal data"
+        "REMINDERS",
+        "INSTRUCTIONS",
+        "INSTRUCTIONS",
+        "INSTRUCTIONS",
+        "INSTRUCTIONS",
+        "REMINDERS"
     )
 
     val arrayDescription = arrayOf(
+        "To setup the device:\nPosition the monitoring device in an area with proper lighting.",
         "Setup the monitoring device. Attach it to the tripod and position to your desired angle.",
-        "Make sure that the mobile application is connected to the internet of the monitoring device.",
-        "Go to the 'Detection' page and add a camera by clicking the button with '+' sign.",
-        "This is a description of privacy policy."
+        "Make sure that the mobile application and device are connected to the internet",
+        "Go to the 'Home' page and add a camera by clicking the button with '+' sign.",
+        "Open the device and start monitoring.",
+        "You can view the detection logs via 'Logs' or clicking the 'View Logs' in each devices."
     )
 
     override fun getCount(): Int {

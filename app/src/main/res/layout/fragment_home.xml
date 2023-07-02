@@ -52,20 +52,6 @@
                     app:layout_constraintTop_toTopOf="@+id/imageViewDashboard" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/addingBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_add_camera"
-                    app:maxImageSize="32dp"
-                    app:elevation="0dp"
-                    app:tint="@color/warm_black"
-                    app:backgroundTint="@android:color/transparent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/btnSignOut"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,19 +67,51 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="Camera"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/addingBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="0"
+                    android:src="@drawable/ic_add"
+                    app:backgroundTint="@android:color/transparent"
+                    app:elevation="0dp"
+                    app:maxImageSize="32dp"
+                    app:tint="@color/warm_black" />
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Camera"
+                android:layout_height="2dp"
+                android:background="#d3d3d3"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_margin="16dp"/>
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"/>
 
 
 
