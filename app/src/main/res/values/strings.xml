@@ -20,4 +20,5 @@
     <string name="description_zoom_touch_close">Expanded Image</string>
     <string name="log_details">Log Details</string>
     <string name="camera_name">Camera Name</string>
+    <string name="devices">Devices</string>
 </resources>

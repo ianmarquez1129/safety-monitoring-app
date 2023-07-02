@@ -15,6 +15,7 @@ class ViewPagerAdapter(val context: Context) : PagerAdapter() {
 
     // arrays of image, heading, description
     val imgArray = arrayOf(
+        R.drawable.software_engineer,
         R.drawable.howto1,
         R.drawable.howto2,
         R.drawable.howto3,
@@ -24,15 +25,17 @@ class ViewPagerAdapter(val context: Context) : PagerAdapter() {
     )
 
     val titleArray = arrayOf(
-        "REMINDERS",
+        "WELCOME",
         "INSTRUCTIONS",
-        "INSTRUCTIONS",
-        "INSTRUCTIONS",
-        "INSTRUCTIONS",
+        "SET UP DEVICE",
+        "CONNECT TO INTERNET",
+        "ADD A DEVICE",
+        "MONITORING",
         "REMINDERS"
     )
 
     val arrayDescription = arrayOf(
+        "Please read the instructions ahead to learn on how to use the application.",
         "To setup the device:\nPosition the monitoring device in an area with proper lighting.",
         "Setup the monitoring device. Attach it to the tripod and position to your desired angle.",
         "Make sure that the mobile application and device are connected to the internet",

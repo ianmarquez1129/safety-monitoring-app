@@ -3,6 +3,7 @@ package com.zmci.safetymonitoringapp.home.detection.adapter
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,14 +42,16 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
                         val newList = cameraList[adapterPosition]
                         position.cameraName = newList.cameraName
                         position.MQTT_TOPIC = newList.MQTT_TOPIC
+                        val updateDeviceName : EditText = v.findViewById(R.id.updateDeviceName)
+                        val updateUniqueID : EditText = v.findViewById(R.id.updateUniqueID)
+                        updateDeviceName.hint = newList.cameraName
+                        updateUniqueID.hint = newList.MQTT_TOPIC
 
 
                         AlertDialog.Builder(c)
                             .setView(v)
                             .setPositiveButton("Update"){
                                     dialog,_->
-                                val updateDeviceName : EditText = v.findViewById(R.id.updateDeviceName)
-                                val updateUniqueID : EditText = v.findViewById(R.id.updateUniqueID)
                                 if (updateDeviceName.text.toString().isEmpty() || updateUniqueID.text.toString().isEmpty()) {
                                     Toast.makeText(c, "Fill out empty fields", Toast.LENGTH_SHORT)
                                         .show()

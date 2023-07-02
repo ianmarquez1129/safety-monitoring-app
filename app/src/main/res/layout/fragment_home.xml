@@ -7,9 +7,10 @@
     android:background="@color/fragment_bg"
     tools:context=".home.HomeFragment">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +43,7 @@
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Home"
+                    android:text="@string/home"
                     android:layout_marginStart="12dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -77,8 +78,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:text="Camera"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/devices"
                     android:textColor="@color/black"
                     android:layout_weight="1"
                     android:textSize="18sp"
@@ -116,6 +117,6 @@
 
 
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
