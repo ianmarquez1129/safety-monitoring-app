@@ -58,7 +58,7 @@
 
         <ImageView
             android:id="@+id/rMenus"
-            android:src="@drawable/ic_more"
+            android:src="@drawable/ic_more_vert"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_width="30dp"

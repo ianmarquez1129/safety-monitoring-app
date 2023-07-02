@@ -15,10 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.kusu.loadingbutton.LoadingButton
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.database.DatabaseHelper
 import com.zmci.safetymonitoringapp.databinding.FragmentClientBinding
@@ -74,7 +71,6 @@ class ClientFragment : Fragment() {
         val textTotalViolations = view.findViewById<TextView>(R.id.textTotalViolations)
         val textDetect = view.findViewById<TextView>(R.id.textDetect)
         val imgDetect = view.findViewById<ImageView>(R.id.imgDetect)
-        val buttonViewLogs = view.findViewById<LoadingButton>(R.id.buttonViewLogs)
         val cameraClientName = view.findViewById<TextView>(R.id.cameraClientName)
 
         // Get arguments passed by HomeFragment
@@ -85,19 +81,6 @@ class ClientFragment : Fragment() {
 
         // Set camera name as title
         cameraClientName.text = cameraName
-
-        // View Camera Logs
-        buttonViewLogs.setOnClickListener {
-            buttonViewLogs.showLoading()
-            val cameraNameBundle = bundleOf(
-                CAMERA_NAME_KEY to cameraName
-            )
-            findNavController().navigate(
-                R.id.action_fragment_client_to_fragment_camera_logs,
-                cameraNameBundle
-            )
-            buttonViewLogs.hideLoading()
-        }
 
         // Open MQTT Broker communication
         mqttClient = MQTTClient(requireContext(), serverURI, clientId)

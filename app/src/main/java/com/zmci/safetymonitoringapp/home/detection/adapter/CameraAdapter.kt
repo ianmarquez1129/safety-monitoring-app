@@ -12,10 +12,13 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.home.HomeFragment
 import com.zmci.safetymonitoringapp.home.detection.model.CameraData
+import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
 
 class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
     inner class CameraViewHolder(val v: View, listener: onItemClickListener):RecyclerView.ViewHolder(v){
@@ -36,6 +39,17 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
             popupMenus.inflate(R.menu.show_menu)
             popupMenus.setOnMenuItemClickListener {
                 when(it.itemId){
+                    R.id.viewLogs->{
+                        val newList = cameraList[adapterPosition]
+                        position.cameraName = newList.cameraName
+                        position.MQTT_TOPIC = newList.MQTT_TOPIC
+                        val cameraName = newList.cameraName
+                        val cameraNameBundle = bundleOf(
+                            CAMERA_NAME_KEY to cameraName
+                        )
+                        v.findNavController().navigate(R.id.action_navigation_home_to_fragment_camera_logs, cameraNameBundle)
+                        true
+                    }
                     R.id.edit->{
                         val v = LayoutInflater.from(c).inflate(R.layout.fragment_update_camera,null)
 

@@ -20,24 +20,6 @@
         android:textAlignment="center"
         android:layout_margin="16dp"/>
 
-    <com.kusu.loadingbutton.LoadingButton
-        android:id="@+id/buttonViewLogs"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="24dp"
-        android:text="@string/view_logs"
-        android:textColor="@color/white"
-        style="@android:style/Widget.Button"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:background="@drawable/button_background"
-        app:lb_buttonColor="@color/green"
-        app:lb_isShadowEnable="true"
-        app:lb_isCircular="true"
-        app:lb_loaderColor="@color/white"
-        app:lb_shadowColor="@color/warm_black"
-        app:lb_shadowHeight="5dp" />
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

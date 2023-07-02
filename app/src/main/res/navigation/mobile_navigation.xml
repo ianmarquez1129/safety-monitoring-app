@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_to_fragment_camera_credentials"
             app:destination="@id/fragment_camera_credentials" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_camera_logs"
+            app:destination="@id/fragment_camera_logs" />
     </fragment>
 
     <fragment
@@ -84,11 +87,7 @@
         android:id="@+id/fragment_client"
         android:name="com.zmci.safetymonitoringapp.home.detection.ClientFragment"
         android:label="Detection Client"
-        tools:layout="@layout/fragment_client" >
-        <action
-            android:id="@+id/action_fragment_client_to_fragment_camera_logs"
-            app:destination="@id/fragment_camera_logs" />
-    </fragment>
+        tools:layout="@layout/fragment_client" />
 
     <fragment
         android:id="@+id/fragment_camera_logs"

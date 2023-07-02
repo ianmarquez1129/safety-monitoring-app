@@ -21,4 +21,10 @@
     <string name="log_details">Log Details</string>
     <string name="camera_name">Camera Name</string>
     <string name="devices">Devices</string>
+    <string name="plugin">Plug in the device and wait until the LED blinks red and green.</string>
+    <string name="keep_your_phone_close">Tip: Keep your phone close to the device throughout the setup.</string>
+    <string name="led_blinking">LED not blinking red and green?\nPress and hold the reset button until the LED blinks red.</string>
+    <string name="next">Next</string>
+    <string name="device_name">Device Name</string>
+    <string name="device_unique_id">Device Unique ID</string>
 </resources>
