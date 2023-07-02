@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_navigation_home_to_fragment_client"
             app:destination="@id/fragment_client" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_camera_credentials"
+            app:destination="@id/fragment_camera_credentials" />
     </fragment>
 
     <fragment

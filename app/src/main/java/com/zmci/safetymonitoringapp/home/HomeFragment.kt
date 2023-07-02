@@ -1,10 +1,12 @@
 package com.zmci.safetymonitoringapp.home
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -15,6 +17,7 @@ import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignOutOptions
 import com.amplifyframework.core.Amplify
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.zmci.safetymonitoringapp.DashboardActivity
 import com.zmci.safetymonitoringapp.LoginActivity
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.database.DatabaseHelper
@@ -74,7 +77,7 @@ class HomeFragment : Fragment() {
 
         val addingBtn = view.findViewById<FloatingActionButton>(R.id.addingBtn)
         addingBtn.setOnClickListener{
-            view.findNavController().navigate(R.id.action_navigation_home_to_fragment_add_camera)
+            checkAddDevice()
         }
 
         try {
@@ -108,6 +111,19 @@ class HomeFragment : Fragment() {
             e.printStackTrace()
         }
 
+    }
+
+    private fun checkAddDevice() {
+        val deviceDialog = AlertDialog.Builder(this.requireContext())
+        deviceDialog.setTitle("Add a device")
+        deviceDialog.setItems(R.array.add_device) { dialog, which ->
+            when (which) {
+                0 -> { findNavController().navigate(R.id.action_navigation_home_to_fragment_add_camera) }
+                1 -> { findNavController().navigate(R.id.action_navigation_home_to_fragment_camera_credentials) }
+            }
+        }
+        deviceDialog.create()
+        deviceDialog.show()
     }
 
     override fun onDestroyView() {

@@ -23,7 +23,8 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
+
 
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -64,5 +65,10 @@ class DashboardActivity : AppCompatActivity() {
             }
         }
         //End of vibration effect
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_dashboard) as NavHostFragment
+        val navController = navHostFragment.navController
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

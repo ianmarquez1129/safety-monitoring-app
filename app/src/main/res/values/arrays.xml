@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="add_device">
+        <item>Set up and add device</item>
+        <item>Add device only</item>
+    </string-array>
+</resources>
