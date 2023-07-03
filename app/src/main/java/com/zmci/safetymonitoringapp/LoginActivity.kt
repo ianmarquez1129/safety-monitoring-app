@@ -1,9 +1,12 @@
 package com.zmci.safetymonitoringapp
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.amplifyframework.core.Amplify
@@ -40,15 +43,18 @@ class LoginActivity : AppCompatActivity() {
         buttonLogin = findViewById(R.id.buttonLogin)
         username = findViewById(R.id.editTextUsername)
         password = findViewById(R.id.editTextPassword)
+
         buttonLogin.setOnClickListener{
             buttonLogin.showLoading()
             if (username.text.toString().isEmpty() || password.text.toString().isEmpty()){
                 buttonLogin.hideLoading()
-                Snackbar.make(
-                    binding.root,
-                    "Fill out empty fields",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                val snackBarView = Snackbar.make(binding.root, R.string.fill_out_empty_fields , Snackbar.LENGTH_LONG)
+                val view = snackBarView.view
+                val params = view.layoutParams as FrameLayout.LayoutParams
+                params.gravity = Gravity.TOP
+                view.layoutParams = params
+                snackBarView.setBackgroundTint(Color.RED)
+                snackBarView.show()
             } else {
                 Amplify.Auth.signIn(username.text.toString(), password.text.toString(),
                     { result ->
@@ -62,14 +68,25 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             Log.i("AuthQuickstart", "Sign in not complete")
                             buttonLogin.hideLoading()
-                            Snackbar.make(binding.root, "Login not complete", Snackbar.LENGTH_SHORT)
-                                .show()
+                            val snackBarView = Snackbar.make(binding.root, R.string.login_not_complete , Snackbar.LENGTH_LONG)
+                            val view = snackBarView.view
+                            val params = view.layoutParams as FrameLayout.LayoutParams
+                            params.gravity = Gravity.TOP
+                            view.layoutParams = params
+                            snackBarView.setBackgroundTint(Color.RED)
+                            snackBarView.show()
                         }
                     },
                     {
                         Log.e("AuthQuickstart", "Failed to sign in", it)
                         buttonLogin.hideLoading()
-                        Snackbar.make(binding.root, "Username or Password is Incorrect", Snackbar.LENGTH_SHORT).show()
+                        val snackBarView = Snackbar.make(binding.root, R.string.username_or_password_incorrect , Snackbar.LENGTH_SHORT)
+                        val view = snackBarView.view
+                        val params = view.layoutParams as FrameLayout.LayoutParams
+                        params.gravity = Gravity.TOP
+                        view.layoutParams = params
+                        snackBarView.setBackgroundTint(Color.RED)
+                        snackBarView.show()
                     }
                 )
             }

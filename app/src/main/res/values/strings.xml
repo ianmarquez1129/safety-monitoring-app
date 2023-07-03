@@ -27,4 +27,16 @@
     <string name="next">Next</string>
     <string name="device_name">Device Name</string>
     <string name="device_unique_id">Device Unique ID</string>
+    <string name="please_provide_a_strong_password">Please provide a strong password</string>
+    <string name="verify_your_account">Verify your account</string>
+    <string name="fill_out_empty_fields">Fill out empty fields</string>
+    <string name="password_reset_success_check_your_email">Password reset success, check your email</string>
+    <string name="sign_up_failed">Sign up failed</string>
+    <string name="password_reset_failed">Password reset failed</string>
+    <string name="login_not_complete">Login not complete</string>
+    <string name="account_reset_successful">Account reset successful</string>
+    <string name="failed_to_confirm_password_reset">Failed to confirm password reset</string>
+    <string name="account_was_successfully_verified">Account was successfully verified</string>
+    <string name="invalid_code">Invalid code</string>
+    <string name="username_or_password_incorrect">Username or Password is Incorrect</string>
 </resources>

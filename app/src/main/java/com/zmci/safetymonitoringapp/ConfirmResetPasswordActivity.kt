@@ -1,10 +1,13 @@
 package com.zmci.safetymonitoringapp
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.widget.EditText
+import android.widget.FrameLayout
 import com.amplifyframework.core.Amplify
 import com.google.android.material.snackbar.Snackbar
 import com.kusu.loadingbutton.LoadingButton
@@ -35,41 +38,49 @@ class ConfirmResetPasswordActivity : AppCompatActivity() {
             buttonSubmit.showLoading()
             if (confirmationCode.text.toString().isEmpty() || newPassword.text.toString().isEmpty()){
                 buttonSubmit.hideLoading()
-                Snackbar.make(
-                    binding.root,
-                    "Fill out empty fields",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                val snackBarView = Snackbar.make(binding.root, R.string.fill_out_empty_fields , Snackbar.LENGTH_LONG)
+                val view = snackBarView.view
+                val params = view.layoutParams as FrameLayout.LayoutParams
+                params.gravity = Gravity.TOP
+                view.layoutParams = params
+                snackBarView.setBackgroundTint(Color.RED)
+                snackBarView.show()
             } else {
                 if (isValidPassword(newPassword.text.toString())){
                     Amplify.Auth.confirmResetPassword(username, newPassword.text.toString(), confirmationCode.text.toString(),
                         { Log.i("AuthQuickstart", "New password confirmed")
                             buttonSubmit.hideLoading()
-                            Snackbar.make(
-                                binding.root,
-                                "Account reset successful",
-                                Snackbar.LENGTH_LONG
-                            ).show()
+                            val snackBarView = Snackbar.make(binding.root, R.string.account_reset_successful , Snackbar.LENGTH_LONG)
+                            val view = snackBarView.view
+                            val params = view.layoutParams as FrameLayout.LayoutParams
+                            params.gravity = Gravity.TOP
+                            view.layoutParams = params
+                            snackBarView.setBackgroundTint(Color.GREEN)
+                            snackBarView.show()
                             val i = Intent(this, LoginActivity::class.java)
                             startActivity(i)
                             finish()
                         },
                         { Log.e("AuthQuickstart", "Failed to confirm password reset", it)
                             buttonSubmit.hideLoading()
-                            Snackbar.make(
-                                binding.root,
-                                "Failed to confirm password reset",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
+                            val snackBarView = Snackbar.make(binding.root, R.string.failed_to_confirm_password_reset , Snackbar.LENGTH_LONG)
+                            val view = snackBarView.view
+                            val params = view.layoutParams as FrameLayout.LayoutParams
+                            params.gravity = Gravity.TOP
+                            view.layoutParams = params
+                            snackBarView.setBackgroundTint(Color.RED)
+                            snackBarView.show()
                         }
                     )
                 } else {
                     buttonSubmit.hideLoading()
-                    Snackbar.make(
-                        binding.root,
-                        "Please provide a strong password",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    val snackBarView = Snackbar.make(binding.root, R.string.please_provide_a_strong_password , Snackbar.LENGTH_LONG)
+                    val view = snackBarView.view
+                    val params = view.layoutParams as FrameLayout.LayoutParams
+                    params.gravity = Gravity.TOP
+                    view.layoutParams = params
+                    snackBarView.setBackgroundTint(Color.BLUE)
+                    snackBarView.show()
                 }
 
             }

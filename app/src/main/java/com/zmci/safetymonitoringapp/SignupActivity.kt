@@ -1,9 +1,12 @@
 package com.zmci.safetymonitoringapp
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.options.AuthSignUpOptions
@@ -35,8 +38,14 @@ class SignupActivity : AppCompatActivity() {
         buttonSignup.setOnClickListener{
             buttonSignup.showLoading()
             if (registerUsername.text.toString().isEmpty() || registerEmail.text.toString().isEmpty() || registerPassword.text.toString().isEmpty()){
-                Snackbar.make(binding.root, "Fill out empty fields", Snackbar.LENGTH_SHORT).show()
                 buttonSignup.hideLoading()
+                val snackBarView = Snackbar.make(binding.root, "Fill out empty fields" , Snackbar.LENGTH_LONG)
+                val view = snackBarView.view
+                val params = view.layoutParams as FrameLayout.LayoutParams
+                params.gravity = Gravity.TOP
+                view.layoutParams = params
+                snackBarView.setBackgroundTint(Color.RED)
+                snackBarView.show()
             } else {
                 if (isValidPassword(registerPassword.text.toString())) {
                     val options = AuthSignUpOptions.builder()
@@ -48,11 +57,13 @@ class SignupActivity : AppCompatActivity() {
                         {
                             Log.i("AuthQuickStart", "Sign up succeeded: $it")
                             buttonSignup.hideLoading()
-                            Snackbar.make(
-                                binding.root,
-                                "Verify your account",
-                                Snackbar.LENGTH_LONG
-                            ).show()
+                            val snackBarView = Snackbar.make(binding.root, R.string.verify_your_account , Snackbar.LENGTH_LONG)
+                            val view = snackBarView.view
+                            val params = view.layoutParams as FrameLayout.LayoutParams
+                            params.gravity = Gravity.TOP
+                            view.layoutParams = params
+                            snackBarView.setBackgroundTint(Color.GREEN)
+                            snackBarView.show()
                             val i = Intent(this, ConfirmActivity::class.java)
                             i.putExtra("username", registerUsername.text.toString())
                             startActivity(i)
@@ -60,16 +71,23 @@ class SignupActivity : AppCompatActivity() {
                         {
                             Log.e("AuthQuickStart", "Sign up failed", it)
                             buttonSignup.hideLoading()
-                            Snackbar.make(binding.root, "Signup failed", Snackbar.LENGTH_SHORT)
-                                .show()
+                            val snackBarView = Snackbar.make(binding.root, R.string.sign_up_failed , Snackbar.LENGTH_LONG)
+                            val view = snackBarView.view
+                            val params = view.layoutParams as FrameLayout.LayoutParams
+                            params.gravity = Gravity.TOP
+                            view.layoutParams = params
+                            snackBarView.setBackgroundTint(Color.RED)
+                            snackBarView.show()
                         }
                     )
                 } else {
-                    Snackbar.make(
-                        binding.root,
-                        "Please provide a strong password",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    val snackBarView = Snackbar.make(binding.root, R.string.please_provide_a_strong_password , Snackbar.LENGTH_LONG)
+                    val view = snackBarView.view
+                    val params = view.layoutParams as FrameLayout.LayoutParams
+                    params.gravity = Gravity.TOP
+                    view.layoutParams = params
+                    snackBarView.setBackgroundTint(Color.BLUE)
+                    snackBarView.show()
                     buttonSignup.hideLoading()
                 }
             }

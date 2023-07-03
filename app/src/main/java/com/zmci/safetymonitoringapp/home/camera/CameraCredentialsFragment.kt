@@ -2,11 +2,14 @@ package com.zmci.safetymonitoringapp.home.camera
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
@@ -50,7 +53,13 @@ class CameraCredentialsFragment : Fragment() {
             buttonCreate.showLoading()
             if (deviceName.text.toString().isEmpty() || deviceUniqueID.text.toString().isEmpty()) {
                 buttonCreate.hideLoading()
-                Snackbar.make(binding.root, "Fill out empty fields", Snackbar.LENGTH_SHORT).show()
+                val snackBarView = Snackbar.make(binding.root, R.string.fill_out_empty_fields , Snackbar.LENGTH_LONG)
+                val view1 = snackBarView.view
+                val params = view1.layoutParams as FrameLayout.LayoutParams
+                params.gravity = Gravity.TOP
+                view1.layoutParams = params
+                snackBarView.setBackgroundTint(Color.RED)
+                snackBarView.show()
             } else {
                 // set mqtt and add credentials to database
                 val camera = CameraData()
