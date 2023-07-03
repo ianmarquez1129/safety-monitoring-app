@@ -1,12 +1,11 @@
 package com.zmci.safetymonitoringapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.widget.ImageView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 
 class IntroductoryActivity : AppCompatActivity() {
@@ -22,7 +21,6 @@ class IntroductoryActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         Handler().postDelayed({
-//            setupAuthButton(UserData)
             UserData.isSignedIn.observe(this, Observer<Boolean> { isSignedUp ->
                 // update UI
                 Log.i("TAG", "isSignedIn changed : $isSignedUp")
@@ -40,20 +38,5 @@ class IntroductoryActivity : AppCompatActivity() {
             })
         },3000)
     }
-    private fun setupAuthButton(userData: UserData) {
-
-        // register a click listener
-
-        if (userData.isSignedIn.value!!) {
-            val intent = Intent(this,DashboardActivity::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            val intent = Intent(this,LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
-
 
 }
