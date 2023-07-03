@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SafetyMonitoringApp</string>
+    <string name="app_name">Safety Monitoring App</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
