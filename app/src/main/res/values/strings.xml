@@ -39,4 +39,17 @@
     <string name="account_was_successfully_verified">Account was successfully verified</string>
     <string name="invalid_code">Invalid code</string>
     <string name="username_or_password_incorrect">Username or Password is Incorrect</string>
+    <string name="about_safety_monitoring_app">About Safety Monitoring App</string>
+    <string name="title_safety_monitoring_app">SAFETY MONITORING APP</string>
+    <string name="zmci">ZMCI</string>
+    <string name="about_content_1">This mobile application is interconnected to the PPE detection system wherein it can detect the utilization and absence of hard hats, glasses, vest, gloves, and boots.</string>
+    <string name="about_content_2">It has features to notify and let you monitor an area in real-time by setting up the device through this mobile application.</string>
+    <string name="about_content_3">You can also generate report from the detections of the monitoring device.</string>
+    <string name="the_dev_team">The Dev Team</string>
+    <string name="zeus_james_s_baltazar">Zeus James S. Baltazar</string>
+    <string name="intelligent_systems">Intelligent Systems</string>
+    <string name="martin_lorenzo_s_basbacio">Martin Lorenzo S. Basbacio</string>
+    <string name="clarence_gail_a_larrosa">Clarence Gail A. Larrosa</string>
+    <string name="ian_gabriel_c_marquez">Ian Gabriel C. Marquez</string>
+    <string name="systems_administration">Systems Administration</string>
 </resources>
