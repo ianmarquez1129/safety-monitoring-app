@@ -7,54 +7,11 @@
     android:background="@color/fragment_bg"
     tools:context=".about.AboutFragment">
 
-    <LinearLayout
-        android:id="@+id/aboutLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@id/lottieSplash"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/zmci"
-            android:textSize="20sp"
-            android:textStyle="bold|italic"
-            android:textColor="@color/dark_gray"
-            android:textAlignment="center"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_safety_monitoring_app"
-            android:textSize="28sp"
-            android:textStyle="bold|italic"
-            android:textColor="@color/warm_black"
-            android:textAlignment="center"/>
-
-    </LinearLayout>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieSplash"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:lottie_autoPlay="true"
-        app:layout_constraintVertical_bias="0"
-        app:lottie_rawRes="@raw/construction_animation"
-        app:layout_constraintBottom_toTopOf="@id/aboutScrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutLinearLayout"/>
-
     <ScrollView
         android:id="@+id/aboutScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/lottieSplash"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -62,12 +19,47 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/aboutLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zmci"
+                    android:textSize="20sp"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/dark_gray"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_safety_monitoring_app"
+                    android:textSize="28sp"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/warm_black"
+                    android:textAlignment="center"/>
+
+            </LinearLayout>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieSplash"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:lottie_autoPlay="true"
+                app:layout_constraintVertical_bias="0"
+                app:lottie_rawRes="@raw/construction_animation"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/about_safety_monitoring_app"
+                android:layout_marginTop="24dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/warm_black"
@@ -293,7 +285,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="48dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp"
                 app:cardMaxElevation="5dp"
