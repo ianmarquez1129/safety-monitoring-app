@@ -46,16 +46,16 @@ class DashboardActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         //Vibration effect
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        if (vibrator.hasVibrator()) { // Vibrator availability checking
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)) // New vibrate method for API Level 26 or higher
-                Log.d("tag","This device vibrates... from if")
-            } else {
-                vibrator.vibrate(500) // Vibrate method for below API Level 26
-                Log.d("tag","This device vibrates... from else")
-            }
-        }
+//        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+//        if (vibrator.hasVibrator()) { // Vibrator availability checking
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)) // New vibrate method for API Level 26 or higher
+//                Log.d("tag","This device vibrates... from if")
+//            } else {
+//                vibrator.vibrate(500) // Vibrate method for below API Level 26
+//                Log.d("tag","This device vibrates... from else")
+//            }
+//        }
         //End of vibration effect
     }
     override fun onSupportNavigateUp(): Boolean {
