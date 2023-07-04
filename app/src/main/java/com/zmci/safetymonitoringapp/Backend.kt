@@ -1,21 +1,15 @@
 package com.zmci.safetymonitoringapp
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.util.Log
-import androidx.core.content.ContextCompat.startActivity
 import com.amplifyframework.AmplifyException
 import com.amplifyframework.auth.AuthChannelEventName
-import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignOutOptions
 import com.amplifyframework.auth.options.AuthSignUpOptions
-import com.amplifyframework.auth.result.AuthSessionResult
-import com.amplifyframework.auth.result.AuthSignInResult
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.AmplifyConfiguration
 import com.amplifyframework.core.InitializationStatus
@@ -143,11 +137,4 @@ object Backend {
         )
     }
 
-    // pass the data from web redirect to Amplify libs
-//    fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
-//        Log.d(TAG, "received requestCode : $requestCode and resultCode : $resultCode")
-//        if (requestCode == AWSCognitoAuthPlugin.WEB_UI_SIGN_IN_ACTIVITY_CODE) {
-//            Amplify.Auth.handleWebUISignInResponse(data)
-//        }
-//    }
 }
