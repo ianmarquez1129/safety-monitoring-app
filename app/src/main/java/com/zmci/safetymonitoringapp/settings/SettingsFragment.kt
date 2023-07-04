@@ -85,24 +85,28 @@ class SettingsFragment : Fragment() {
                 .show()
         }
 
-        Amplify.Auth.fetchUserAttributes(
-            {user ->
-                val currentEmailVerified = user[1].value.toString()
-                val currentUserEmail = user[2].value.toString()
-                Log.i("EmailVerified", currentEmailVerified)
-                Log.i("UserEmail", currentUserEmail)
-                userEmail.text = currentUserEmail
-                if (currentEmailVerified == "true"){
-                    userVerify.text = "Verified"
-                } else {
-                    userVerify.setTextColor(Color.RED)
-                    userVerify.text = "Not verified"
-                }
+        try {
+            Amplify.Auth.fetchUserAttributes(
+                { user ->
+                    val currentEmailVerified = user[1].value.toString()
+                    val currentUserEmail = user[2].value.toString()
+                    Log.i("EmailVerified", currentEmailVerified)
+                    Log.i("UserEmail", currentUserEmail)
+                    userEmail.text = currentUserEmail
+                    if (currentEmailVerified == "true") {
+                        userVerify.text = "Verified"
+                    } else {
+                        userVerify.setTextColor(Color.RED)
+                        userVerify.text = "Not verified"
+                    }
 
-            },{
-                Log.i("FetchUserAttribute", "Error fetch user attribute")
-            }
-        )
+                }, {
+                    Log.i("FetchUserAttribute", "Error fetch user attribute")
+                }
+            )
+        } catch (e : Exception) {
+            e.printStackTrace()
+        }
 
     }
 

@@ -75,4 +75,5 @@
     <string name="notices">Notices</string>
     <string name="authorized_personnel">Authorized Personnel</string>
     <string name="security_measures">Security Measures</string>
+    <string name="by_clicking_sign_up_you_agree_to_our_privacy_statement">By clicking Sign Up, you agree to our Privacy Statement.</string>
 </resources>

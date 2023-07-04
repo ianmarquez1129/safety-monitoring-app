@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Gravity
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.options.AuthSignUpOptions
@@ -14,6 +15,7 @@ import com.amplifyframework.core.Amplify
 import com.google.android.material.snackbar.Snackbar
 import com.kusu.loadingbutton.LoadingButton
 import com.zmci.safetymonitoringapp.databinding.ActivitySignupBinding
+import com.zmci.safetymonitoringapp.settings.PrivacyActivity
 import java.util.regex.Pattern
 
 class SignupActivity : AppCompatActivity() {
@@ -24,6 +26,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var registerUsername : EditText
     private lateinit var registerEmail : EditText
     private lateinit var registerPassword : EditText
+    private lateinit var textViewPrivacy : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +37,12 @@ class SignupActivity : AppCompatActivity() {
         registerUsername = findViewById(R.id.registerUsername)
         registerEmail = findViewById(R.id.registerEmail)
         registerPassword = findViewById(R.id.registerPassword)
+        textViewPrivacy = findViewById(R.id.textViewPrivacy)
+
+        textViewPrivacy.setOnClickListener {
+            val i = Intent(this, PrivacyActivity::class.java)
+            startActivity(i)
+        }
 
         buttonSignup.setOnClickListener{
             buttonSignup.showLoading()

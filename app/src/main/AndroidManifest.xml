@@ -10,7 +10,6 @@
     <application
         android:name=".SafetyMonitoringApp"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SafetyMonitoringApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".settings.PrivacyActivity"
+            android:exported="false" />
         <activity
             android:name=".ConfirmResetPasswordActivity"
             android:exported="false" />
