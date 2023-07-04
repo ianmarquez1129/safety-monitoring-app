@@ -25,18 +25,10 @@ class DashboardActivity : AppCompatActivity() {
 
 //        supportActionBar?.hide()
 
-
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val username = intent.getStringExtra("username").toString()
-
-//        val btnTutorial = findViewById<Button>(R.id.btnTutorial)
-//        btnTutorial.setOnClickListener{
-//            val i = Intent(this,MainActivity::class.java)
-//            startActivity(i)
-//            finish()
-//        }
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_dashboard) as NavHostFragment
 
@@ -47,7 +39,7 @@ class DashboardActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_logs, R.id.navigation_about
+                R.id.navigation_home, R.id.navigation_logs, R.id.navigation_about, R.id.navigation_settings
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

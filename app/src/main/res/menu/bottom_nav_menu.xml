@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_info"
         android:title="@string/about" />
 
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+
 </menu>

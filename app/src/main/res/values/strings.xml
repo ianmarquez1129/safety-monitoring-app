@@ -5,6 +5,7 @@
     <string name="home">Home</string>
     <string name="logs">Logs</string>
     <string name="about">About</string>
+    <string name="settings">Settings</string>
     <string name="verification_note">Note:\nDo not close this window while in verification process. If you have problem in verifying, create a new account with different username.</string>
     <string name="reset_password_note">After a successful reset of your account, please check your email for verification code.</string>
     <string name="confirm_reset_password_note">Confirmation code has been sent to your registered email. Please enter the confirmation code and a new strong password.</string>
