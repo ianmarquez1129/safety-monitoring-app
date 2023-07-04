@@ -58,7 +58,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val cameraList = ArrayList<CameraData>()
 
         if (cursor.count == 0)
-            Toast.makeText(context, "No Camera Found", Toast.LENGTH_SHORT).show() else {
+            Log.i("Devices", "No Camera Found") else {
             cursor.moveToFirst()
             while (!cursor.isAfterLast) {
                 val camera = CameraData()
@@ -69,7 +69,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 cameraList.add(camera)
                 cursor.moveToNext()
             }
-            Toast.makeText(context,"${cursor.count.toString()} Devices Found", Toast.LENGTH_SHORT).show()
+            Log.i("Devices","${cursor.count.toString()} Devices Found")
         }
         cursor.close()
         db.close()
@@ -91,7 +91,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         try {
             db.insert(TABLE_CAMERA, null, values)
-            Toast.makeText(context, "Camera Added", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Device Added", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
         }
@@ -148,7 +148,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val detectionList = ArrayList<Detection>()
 
         if (cursor.count == 0)
-            Toast.makeText(context, "No Records Found", Toast.LENGTH_SHORT).show() else {
+            Log.i("Records", "No Records Found") else {
             cursor.moveToFirst()
             while (!cursor.isAfterLast) {
                 val detection = Detection()
