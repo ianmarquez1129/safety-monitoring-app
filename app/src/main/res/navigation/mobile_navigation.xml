@@ -44,7 +44,11 @@
         android:id="@+id/navigation_settings"
         android:name="com.zmci.safetymonitoringapp.settings.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_fragment_privacy"
+            app:destination="@id/fragment_privacy" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_add_camera"
@@ -110,5 +114,11 @@
         android:name="com.zmci.safetymonitoringapp.home.detection.DetectionReportFragment"
         android:label="Log Details"
         tools:layout="@layout/fragment_detection_report" />
+
+    <fragment
+        android:id="@+id/fragment_privacy"
+        android:name="com.zmci.safetymonitoringapp.settings.PrivacyFragment"
+        android:label="@string/privacy"
+        tools:layout="@layout/fragment_privacy" />
 
 </navigation>

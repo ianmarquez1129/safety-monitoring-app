@@ -53,4 +53,26 @@
     <string name="clarence_gail_a_larrosa">Clarence Gail A. Larrosa</string>
     <string name="ian_gabriel_c_marquez">Ian Gabriel C. Marquez</string>
     <string name="systems_administration">Systems Administration</string>
+    <string name="privacy">Privacy</string>
+    <string name="disclaimer1">All effort is taken to ensure that all information collected is informative and accurate as possible. Information collected from detection is secured and the monitoring system will give a copy of results to the safety officers for future reference.</string>
+    <string name="scope_and_purposes_1">This data privacy policy describe the monitoring device and explains the safeguards we have put in place to protect personal data of any individuals who may be captured by the monitoring device.</string>
+    <string name="scope_and_purposes_2">The collection, disclosure, use, storage, and other processing of personal data by the monitoring device is for references for verifying any violation/s of the workers and managing a safe environment for the workers, including without limitation:</string>
+    <string name="scope_and_purposes_3">\t- preventing removal of PPE\n\t- assisting safety officers to monitor non-compliance\n\t- for dispute-resolution purposes where images might be able to settle that dispute.</string>
+    <string name="scope_and_purposes_4">The monitoring device is not used for purposed other than those described above.</string>
+    <string name="monitoring_device_1">The monitoring device operating time during working hours.</string>
+    <string name="monitoring_device_2">The monitoring device captures image of any movement and person that is spotted in the area under surveillance.</string>
+    <string name="monitoring_device_3">The monitoring device do not conduct sound recording.</string>
+    <string name="location_of_monitoring_device_1">The placement of monitoring device shall not intrude the privacy of individual and the task of the workers.</string>
+    <string name="location_of_monitoring_device_2">Upon installation, the device is tested to ensure that only the working area are monitored.</string>
+    <string name="notices_1">The workers shall be notified of monitoring device operations through signage installed near the areas monitored.</string>
+    <string name="authorized_personnel_1">Images captured by the Company is accessible only to the Safety and Security Team.</string>
+    <string name="authorized_personnel_2">The personnel engaged to ensure the safety of the premises and/or the operation and maintenance of the monitoring device may have access to images only where strictly required to accomplish their task, and are prohibited from using the images for any other purposes.</string>
+    <string name="security_measures_1">Access to the images captured by the monitoring device is restricted and carefully controlled. </string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="scope_and_purposes">Scope and Purposes</string>
+    <string name="monitoring_device_description">Monitoring Device Description</string>
+    <string name="location_of_monitoring_device">Location of Monitoring Device</string>
+    <string name="notices">Notices</string>
+    <string name="authorized_personnel">Authorized Personnel</string>
+    <string name="security_measures">Security Measures</string>
 </resources>
