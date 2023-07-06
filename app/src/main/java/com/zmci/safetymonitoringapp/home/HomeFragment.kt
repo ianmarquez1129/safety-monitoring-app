@@ -16,6 +16,7 @@ import com.zmci.safetymonitoringapp.database.DatabaseHelper
 import com.zmci.safetymonitoringapp.databinding.FragmentHomeBinding
 import com.zmci.safetymonitoringapp.home.detection.adapter.CameraAdapter
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
+import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
 
 class HomeFragment : Fragment() {
@@ -66,10 +67,12 @@ class HomeFragment : Fragment() {
                 override fun onItemClick(position: Int) {
                     val cameraName = cameraList[position].cameraName
                     val topic = cameraList[position].MQTT_TOPIC
+                    val clientID = cameraList[position].MQTT_CLIENT_ID
 
                     val mqttCredentialsBundle = bundleOf(
                         CAMERA_NAME_KEY to cameraName,
-                        MQTT_TOPIC_KEY to topic
+                        MQTT_TOPIC_KEY to topic,
+                        MQTT_CLIENT_ID_KEY to clientID
                     )
                     findNavController().navigate(
                         R.id.action_navigation_home_to_fragment_client, mqttCredentialsBundle
