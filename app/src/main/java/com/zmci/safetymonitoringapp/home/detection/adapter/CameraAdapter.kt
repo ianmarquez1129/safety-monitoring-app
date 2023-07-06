@@ -115,7 +115,7 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
                                     cameraList.removeAt(adapterPosition)
                                     notifyItemRemoved(adapterPosition)
                                     notifyItemRangeChanged(adapterPosition,cameraList.size)
-                                    Toast.makeText(c, "Camera $cameraName Deleted", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(c, "Device $cameraName Deleted", Toast.LENGTH_SHORT).show()
                                 } else {
                                     Toast.makeText(c, "Error Deleting", Toast.LENGTH_SHORT).show()
                                 }
