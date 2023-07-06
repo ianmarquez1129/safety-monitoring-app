@@ -4,7 +4,7 @@ const val CAMERA_NAME_KEY       = "CAMERA_NAME"
 const val MQTT_CLIENT_ID_KEY    = "MQTT_CLIENT_ID"
 const val MQTT_TOPIC_KEY        = "MQTT_TOPIC"
 
-const val MQTT_SERVER_URI       = "ssl://ap2f69s0r05ae-ats.iot.ap-southeast-2.amazonaws.com:8883"
+const val MQTT_SERVER_URI       = "ssl://ap2f69s0r05ae-ats.iot.ap-southeast-1.amazonaws.com:8883"
 
 // DETECTION
 
