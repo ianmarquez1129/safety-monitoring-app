@@ -61,6 +61,8 @@ class LoginActivity : AppCompatActivity() {
                         if (result.isSignedIn) {
                             Log.i("AuthQuickstart", "Sign in succeeded")
                             buttonLogin.hideLoading()
+                            Backend.fetchUserAttributes()
+                            UserData.setUserName(username.text.toString())
                             val i = Intent(this, MainActivity::class.java)
                             i.putExtra("username", username.text.toString())
                             startActivity(i)

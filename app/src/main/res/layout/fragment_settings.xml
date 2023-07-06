@@ -41,20 +41,20 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/userEmail"
+                    android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="user@gmail.com"
+                    android:text=""
                     android:textColor="@color/warm_black"
                     android:textSize="19sp"
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/userVerify"
+                    android:id="@+id/userEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Verified"
-                    android:textColor="@color/green"
+                    android:text=""
+                    android:textColor="@color/warm_black"
                     android:textSize="14sp" />
 
             </LinearLayout>

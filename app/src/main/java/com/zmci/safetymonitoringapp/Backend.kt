@@ -137,4 +137,15 @@ object Backend {
         )
     }
 
+    fun fetchUserAttributes () {
+        Amplify.Auth.fetchUserAttributes(
+            { user ->
+                val currentUserEmail = user[2].value.toString()
+                UserData.setUserEmail(currentUserEmail)
+            }, {
+                Log.i("FetchUserAttribute", "Error fetch user attribute")
+            }
+        )
+    }
+
 }

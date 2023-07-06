@@ -26,6 +26,7 @@ class IntroductoryActivity : AppCompatActivity() {
                 Log.i("TAG", "isSignedIn changed : $isSignedUp")
 
                 if (isSignedUp) {
+                    Backend.fetchUserAttributes()
                     val i = Intent(this,DashboardActivity::class.java)
                     startActivity(i)
                     Log.i("AuthQuickstart", "Sign in succeeded")

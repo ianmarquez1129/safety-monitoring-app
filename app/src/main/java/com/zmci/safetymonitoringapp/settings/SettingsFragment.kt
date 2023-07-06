@@ -3,7 +3,6 @@ package com.zmci.safetymonitoringapp.settings
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignOutOptions
@@ -19,6 +19,7 @@ import com.amplifyframework.core.Amplify
 import com.zmci.safetymonitoringapp.LoginActivity
 import com.zmci.safetymonitoringapp.MainActivity
 import com.zmci.safetymonitoringapp.R
+import com.zmci.safetymonitoringapp.UserData
 import com.zmci.safetymonitoringapp.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -37,8 +38,8 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userEmail = view.findViewById<TextView>(R.id.userEmail)
-        val userVerify = view.findViewById<TextView>(R.id.userVerify)
+        val tvUserEmail = view.findViewById<TextView>(R.id.userEmail)
+        val tvUserName = view.findViewById<TextView>(R.id.userName)
         val buttonTutorial = view.findViewById<Button>(R.id.buttonTutorial)
         val buttonLogout = view.findViewById<Button>(R.id.buttonLogout)
         val buttonPrivacy = view.findViewById<Button>(R.id.buttonPrivacy)
@@ -85,28 +86,14 @@ class SettingsFragment : Fragment() {
                 .show()
         }
 
-        try {
-            Amplify.Auth.fetchUserAttributes(
-                { user ->
-                    val currentEmailVerified = user[1].value.toString()
-                    val currentUserEmail = user[2].value.toString()
-                    Log.i("EmailVerified", currentEmailVerified)
-                    Log.i("UserEmail", currentUserEmail)
-                    userEmail.text = currentUserEmail
-                    if (currentEmailVerified == "true") {
-                        userVerify.text = "Verified"
-                    } else {
-                        userVerify.setTextColor(Color.RED)
-                        userVerify.text = "Not verified"
-                    }
-
-                }, {
-                    Log.i("FetchUserAttribute", "Error fetch user attribute")
-                }
-            )
-        } catch (e : Exception) {
-            e.printStackTrace()
-        }
+        UserData.userEmail.observe(this.viewLifecycleOwner, Observer<String> { userEmail ->
+            // update UI
+            Log.i("TAG", "User Email changed : $userEmail")
+                tvUserEmail.text = userEmail
+        })
+        UserData.userName.observe(this.viewLifecycleOwner, Observer<String> { userName ->
+            tvUserName.text = userName
+        })
 
     }
 
