@@ -23,7 +23,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:layout_margin="16dp"
                 android:background="@drawable/top_background_home_fragment">
 
@@ -51,6 +51,36 @@
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewDashboard"
                     app:layout_constraintStart_toEndOf="@+id/imageViewDashboard"
                     app:layout_constraintTop_toTopOf="@+id/imageViewDashboard" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#d3d3d3"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewDashboard"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Detections Chart"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_gray"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewDashboard" />
+
+
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/ourLineChart"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

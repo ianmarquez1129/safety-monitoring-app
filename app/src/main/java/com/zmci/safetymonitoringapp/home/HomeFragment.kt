@@ -10,14 +10,23 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.database.DatabaseHelper
 import com.zmci.safetymonitoringapp.databinding.FragmentHomeBinding
 import com.zmci.safetymonitoringapp.home.detection.adapter.CameraAdapter
+import com.zmci.safetymonitoringapp.home.detection.model.Detection
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
+import com.zmci.safetymonitoringapp.logs.LogsFragment
 
 class HomeFragment : Fragment() {
 
@@ -27,6 +36,7 @@ class HomeFragment : Fragment() {
         lateinit var databaseHelper: DatabaseHelper
     }
     private lateinit var cameraAdapter: CameraAdapter
+    private lateinit var ourLineChart: LineChart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +54,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        ourLineChart = view.findViewById(R.id.ourLineChart)
+        retrieveRecordsAndPopulateCharts()
 
         val addingBtn = view.findViewById<FloatingActionButton>(R.id.addingBtn)
         addingBtn.setOnClickListener{
@@ -96,6 +109,53 @@ class HomeFragment : Fragment() {
         }
         deviceDialog.create()
         deviceDialog.show()
+    }
+
+    private fun retrieveRecordsAndPopulateCharts(){
+        val detections: List<Detection> = databaseHelper.getAllDetection(requireContext())
+
+        val detectionId = Array<Int>(detections.size){ 0 }
+        val totalViolators = Array<Int>(detections.size){ 0 }
+        val totalViolations = Array<Int>(detections.size){ 0 }
+
+        var index = 0
+        for (a in detections) {
+            detectionId[index] = a.id
+            totalViolators[index] = a.total_violators.toInt()
+            totalViolations[index] = a.total_violations.toInt()
+            index++
+        }
+        populateLineChart(totalViolations)
+
+
+    }
+    private fun populateLineChart(values: Array<Int>) {
+        val ourLineChartEntries: ArrayList<Entry> = ArrayList()
+
+        var i = 0
+
+        for (entry in values) {
+            var value = values[i].toFloat()
+            ourLineChartEntries.add(Entry(i.toFloat(), value))
+            i++
+        }
+        val lineDataSet = LineDataSet(ourLineChartEntries, "")
+        lineDataSet.setColors(*ColorTemplate.PASTEL_COLORS)
+        val data = LineData(lineDataSet)
+        ourLineChart.axisLeft.setDrawGridLines(false)
+        val xAxis: XAxis = ourLineChart.xAxis
+        xAxis.setDrawGridLines(false)
+        xAxis.setDrawAxisLine(false)
+        ourLineChart.legend.isEnabled = false
+
+        //remove description label
+        ourLineChart.description.isEnabled = false
+
+        //add animation
+        ourLineChart.animateX(1000, Easing.EaseInSine)
+        ourLineChart.data = data
+        //refresh
+        ourLineChart.invalidate()
     }
 
     override fun onDestroyView() {

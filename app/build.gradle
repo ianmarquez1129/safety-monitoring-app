@@ -76,4 +76,7 @@ dependencies {
     //BouncyCastle
     implementation 'org.bouncycastle:bcpkix-jdk15on:1.67'
 
+    //AndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }
