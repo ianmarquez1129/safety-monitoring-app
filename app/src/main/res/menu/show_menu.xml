@@ -6,6 +6,10 @@
         android:title="View Logs"
         android:icon="@drawable/ic_history"/>
     <item
+        android:id="@+id/setPreference"
+        android:title="Set Preferences"
+        android:icon="@drawable/ic_checklist"/>
+    <item
         android:id="@+id/edit"
         android:title="Edit"
         android:icon="@drawable/ic_edit"/>

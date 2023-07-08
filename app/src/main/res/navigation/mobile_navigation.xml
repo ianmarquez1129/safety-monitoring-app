@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_home_to_fragment_camera_logs"
             app:destination="@id/fragment_camera_logs" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_preference"
+            app:destination="@id/fragment_preference" />
     </fragment>
 
     <fragment
@@ -120,5 +123,11 @@
         android:name="com.zmci.safetymonitoringapp.settings.PrivacyFragment"
         android:label="@string/privacy"
         tools:layout="@layout/fragment_privacy" />
+
+    <fragment
+        android:id="@+id/fragment_preference"
+        android:name="com.zmci.safetymonitoringapp.home.detection.PreferenceFragment"
+        android:label="Set Preferences"
+        tools:layout="@layout/fragment_preference" />
 
 </navigation>

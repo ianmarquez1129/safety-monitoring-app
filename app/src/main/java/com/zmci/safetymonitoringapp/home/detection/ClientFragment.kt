@@ -90,11 +90,11 @@ class ClientFragment : Fragment() {
             try {
                 if (mqttClient.isConnected()) {
                     mqttClient.subscribe(
-                        "ZMCI/$topic",
+                        "ZMCI/$topic/notif",
                         1,
                         object : IMqttActionListener {
                             override fun onSuccess(asyncActionToken: IMqttToken?) {
-                                val msg = "Subscribed to: ZMCI/$topic"
+                                val msg = "Subscribed to: ZMCI/$topic/notif"
                                 Log.d(this.javaClass.name, msg)
                             }
 
@@ -102,7 +102,7 @@ class ClientFragment : Fragment() {
                                 asyncActionToken: IMqttToken?,
                                 exception: Throwable?
                             ) {
-                                Log.d(this.javaClass.name, "Failed to subscribe: ZMCI/$topic")
+                                Log.d(this.javaClass.name, "Failed to subscribe: ZMCI/$topic/notif")
                             }
                         })
                 } else {

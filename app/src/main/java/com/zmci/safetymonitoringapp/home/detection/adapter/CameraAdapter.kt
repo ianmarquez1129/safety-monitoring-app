@@ -19,6 +19,8 @@ import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.home.HomeFragment
 import com.zmci.safetymonitoringapp.home.detection.model.CameraData
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
+import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
+import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
 
 class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
     inner class CameraViewHolder(val v: View, listener: onItemClickListener):RecyclerView.ViewHolder(v){
@@ -48,6 +50,21 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
                             CAMERA_NAME_KEY to cameraName
                         )
                         v.findNavController().navigate(R.id.action_navigation_home_to_fragment_camera_logs, cameraNameBundle)
+                        true
+                    }
+                    R.id.setPreference->{
+                        val newList = cameraList[adapterPosition]
+                        position.cameraName = newList.cameraName
+                        position.MQTT_TOPIC = newList.MQTT_TOPIC
+                        val cameraName = newList.cameraName
+                        val cameraTopic = newList.MQTT_TOPIC
+                        val clientID = newList.MQTT_CLIENT_ID
+                        val cameraNameBundle = bundleOf(
+                            CAMERA_NAME_KEY to cameraName,
+                            MQTT_TOPIC_KEY to cameraTopic,
+                            MQTT_CLIENT_ID_KEY to clientID
+                        )
+                        v.findNavController().navigate(R.id.action_navigation_home_to_fragment_preference, cameraNameBundle)
                         true
                     }
                     R.id.edit->{

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fragment_bg"
+    tools:context=".home.detection.PreferenceFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You can set your detection preference here"
+                android:textColor="@color/dark_gray"
+                android:textSize="18sp"
+                android:padding="15dp"/>
+            <TextView
+                android:id="@+id/preferenceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Setting preference for device"
+                android:textColor="@color/dark_gray"
+                android:textSize="18sp"
+                android:padding="15dp"/>
+
+            <RadioGroup
+                android:id="@+id/helmetGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/helmetTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Helmet"
+                    android:textColor="@color/warm_black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/bothHelmet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Both Helmet"
+                    android:textColor="@color/warm_black"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/noHelmet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Helmet"
+                    android:textColor="@color/warm_black"/>
+
+                <RadioButton
+                    android:id="@+id/withHelmet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="With Helmet"
+                    android:textColor="@color/warm_black"/>
+                <RadioButton
+                    android:id="@+id/withoutHelmet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Without Helmet"
+                    android:textColor="@color/warm_black"/>
+            </RadioGroup>
+            <RadioGroup
+                android:id="@+id/glassesGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/glassesTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Glasses"
+                    android:textColor="@color/warm_black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/bothGlasses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Both Glasses"
+                    android:textColor="@color/warm_black"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/noGlasses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Glasses"
+                    android:textColor="@color/warm_black"/>
+
+                <RadioButton
+                    android:id="@+id/withGlasses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="With Glasses"
+                    android:textColor="@color/warm_black"/>
+                <RadioButton
+                    android:id="@+id/withoutGlasses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Without Glasses"
+                    android:textColor="@color/warm_black"/>
+            </RadioGroup>
+            <RadioGroup
+                android:id="@+id/vestGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/vestTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vest"
+                    android:textColor="@color/warm_black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/bothVest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Both Vest"
+                    android:textColor="@color/warm_black"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/noVest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Vest"
+                    android:textColor="@color/warm_black"/>
+
+                <RadioButton
+                    android:id="@+id/withVest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="With Vest"
+                    android:textColor="@color/warm_black"/>
+                <RadioButton
+                    android:id="@+id/withoutVest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Without Vest"
+                    android:textColor="@color/warm_black"/>
+            </RadioGroup>
+            <RadioGroup
+                android:id="@+id/glovesGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/glovesTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gloves"
+                    android:textColor="@color/warm_black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/bothGloves"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Both Gloves"
+                    android:textColor="@color/warm_black"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/noGloves"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Gloves"
+                    android:textColor="@color/warm_black"/>
+
+                <RadioButton
+                    android:id="@+id/withGloves"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="With Gloves"
+                    android:textColor="@color/warm_black"/>
+                <RadioButton
+                    android:id="@+id/withoutGloves"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Without Gloves"
+                    android:textColor="@color/warm_black"/>
+            </RadioGroup>
+            <RadioGroup
+                android:id="@+id/bootsGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/bootsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Boots"
+                    android:textColor="@color/warm_black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/bothBoots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Both Boots"
+                    android:textColor="@color/warm_black"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/noBoots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Boots"
+                    android:textColor="@color/warm_black"/>
+
+                <RadioButton
+                    android:id="@+id/withBoots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="With Boots"
+                    android:textColor="@color/warm_black"/>
+                <RadioButton
+                    android:id="@+id/withoutBoots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Without Boots"
+                    android:textColor="@color/warm_black"/>
+            </RadioGroup>
+
+            <com.kusu.loadingbutton.LoadingButton
+                android:id="@+id/buttonSetPreferences"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:text="Set Preferences"
+                android:textColor="@color/white"
+                style="@android:style/Widget.Button"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:background="@drawable/button_background"
+                app:lb_buttonColor="@color/green"
+                app:lb_isShadowEnable="true"
+                app:lb_isCircular="true"
+                app:lb_loaderColor="@color/white"
+                app:lb_shadowColor="@color/warm_black"
+                app:lb_shadowHeight="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
