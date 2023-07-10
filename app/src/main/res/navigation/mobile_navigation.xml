@@ -56,7 +56,7 @@
     <fragment
         android:id="@+id/fragment_add_camera"
         android:name="com.zmci.safetymonitoringapp.home.camera.AddCameraFragment"
-        android:label="Add Camera"
+        android:label="Add Device"
         tools:layout="@layout/fragment_add_camera" >
         <action
             android:id="@+id/action_fragment_add_camera_to_fragment_connect_camera"
@@ -66,7 +66,7 @@
     <fragment
         android:id="@+id/fragment_connect_camera"
         android:name="com.zmci.safetymonitoringapp.home.camera.ConnectCameraFragment"
-        android:label="Connect Camera"
+        android:label="Connect Device"
         tools:layout="@layout/fragment_connect_camera" >
         <action
             android:id="@+id/action_fragment_connect_camera_to_fragment_wifi"
@@ -105,7 +105,7 @@
     <fragment
         android:id="@+id/fragment_camera_logs"
         android:name="com.zmci.safetymonitoringapp.home.detection.CameraLogsFragment"
-        android:label="Camera Logs"
+        android:label="Device Logs"
         tools:layout="@layout/fragment_camera_logs" >
         <action
             android:id="@+id/action_fragment_camera_logs_to_fragment_detection_report"
