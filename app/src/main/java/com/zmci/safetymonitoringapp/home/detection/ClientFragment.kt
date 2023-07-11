@@ -184,9 +184,9 @@ class ClientFragment : Fragment() {
                                     // Clear TextView after every loop and
                                     // setup a new one for new incoming data
                                     tvTimestamp.text = "Timestamp: $timestampData"
-                                    textCameraData.text = "Camera details:"
+                                    textCameraData.text = "Device details:"
                                     textTotalViolators.text = "Person: $totalViolators"
-                                    textTotalViolations.text = "Detected PPE: $totalViolations"
+                                    textTotalViolations.text = "Detected Objects: $totalViolations"
                                     textDetect.text = "Details:"
 
                                     // Create a TextView for CameraName
@@ -199,7 +199,7 @@ class ClientFragment : Fragment() {
                                     tvCameraDetails.typeface = Typeface.DEFAULT_BOLD
                                     tvCameraDetails.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
                                     tvCameraDetails.text =
-                                        "Camera Name: $cameraName\n"
+                                        "Device Name: $cameraName\n"
                                     // Display the TextView in LinearLayout view
                                     llCameraDetails.addView(tvCameraDetails)
 

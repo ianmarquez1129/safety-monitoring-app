@@ -89,10 +89,10 @@ class DetectionReportFragment : Fragment() {
         shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime)
 
         //initialize text views
-        cameraReport.text = "Camera details:"
+        cameraReport.text = "Device details:"
         timestampReport.text = "Timestamp: $timestamp"
         violatorsReport.text = "Details:"
-        totalViolationsReport.text = "Detected PPE: $total_violations"
+        totalViolationsReport.text = "Detected Objects: $total_violations"
         totalViolatorsReport.text = "Person: $total_violators"
 
         //Parse the JSON data
@@ -108,7 +108,7 @@ class DetectionReportFragment : Fragment() {
             tvCameraDetails.typeface = Typeface.DEFAULT_BOLD
             tvCameraDetails.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
             tvCameraDetails.text =
-                "Camera name: $cameraName\n"
+                "Device name: $cameraName\n"
             // Display in LinearLayout
             cameraDetails.addView(tvCameraDetails)
             // Convert the string to JSON

@@ -11,7 +11,7 @@
         android:id="@+id/cameraLogs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Camera Logs"
+        android:text="Device Logs"
         android:gravity="center"
         android:textColor="@color/warm_black"
         android:textSize="24sp"
