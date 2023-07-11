@@ -77,3 +77,6 @@ Download the latest APK release [here](https://github.com/cpe-pd/safety-monitori
 
 ## 🎦 Demonstration
 - [Demo Video and Actual Deployment](https://youtu.be/mOH8-uSSyjc)
+- [Multiple PPE Detection for Construction Safety Demo (Cloud-based Mobile Application with AWS) Part 1](https://youtu.be/EVROnbGXeik)
+- [Multiple PPE Detection for Construction Safety Demo (Cloud-based Mobile Application with AWS) Part 2](https://youtu.be/_-cMzedA5Qk)
+- [Multiple PPE Detection for Construction Safety Demo (Cloud-based Mobile Application with AWS) Part 3](https://youtu.be/L9Klephq1J8)
