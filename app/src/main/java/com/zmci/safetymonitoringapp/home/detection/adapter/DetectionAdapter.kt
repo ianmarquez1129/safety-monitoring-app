@@ -1,20 +1,13 @@
 package com.zmci.safetymonitoringapp.home.detection.adapter
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.zmci.safetymonitoringapp.R
-import com.zmci.safetymonitoringapp.home.detection.CameraLogsFragment
 import com.zmci.safetymonitoringapp.home.detection.model.Detection
-import com.zmci.safetymonitoringapp.logs.LogsFragment
 
 class DetectionAdapter(val c: Context, val detectionList:MutableList<Detection>): RecyclerView.Adapter<DetectionAdapter.DetectionViewHolder>() {
 
@@ -23,60 +16,64 @@ class DetectionAdapter(val c: Context, val detectionList:MutableList<Detection>)
         var rTimestamp: TextView = v.findViewById(R.id.rTimestamp)
         var rViolators: TextView = v.findViewById(R.id.rViolators)
         var rViolations: TextView = v.findViewById(R.id.rViolations)
-        var rMenus: ImageView = v.findViewById(R.id.rMenus)
+//        var rMenus: ImageView = v.findViewById(R.id.rMenus)
 
         init {
-            rMenus.setOnClickListener{ popupMenus(it) }
+//            rMenus.setOnClickListener{ popupMenus(it) }
             v.setOnClickListener{
                 listener.onItemClick(adapterPosition)
             }
         }
 
-        private fun popupMenus(v: View) {
-            val position = detectionList[adapterPosition]
-            val popupMenus = PopupMenu(c,v)
-            popupMenus.inflate(R.menu.reports_menu)
-            popupMenus.setOnMenuItemClickListener {
-                when(it.itemId){
-                    R.id.deleteReport->{
-                        val newList = detectionList[adapterPosition]
-                        position.image = newList.image
-                        position.cameraName = newList.cameraName
-                        position.timestamp = newList.timestamp
-                        position.violators = newList.violators
-                        position.total_violations = newList.total_violations
-                        position.total_violators = newList.total_violators
-
-                        val timestamp = newList.timestamp
-
-                        AlertDialog.Builder(c)
-                            .setTitle("Warning")
-                            .setMessage("Are you sure you want to delete: $timestamp ?")
-                            .setPositiveButton("Yes", DialogInterface.OnClickListener{ dialog, which ->
-                                if (CameraLogsFragment.databaseHelper.deleteDetection(newList.id) || LogsFragment.databaseHelper.deleteDetection(newList.id)) {
-                                    detectionList.removeAt(adapterPosition)
-                                    notifyItemRemoved(adapterPosition)
-                                    notifyItemRangeChanged(adapterPosition,detectionList.size)
-                                    Toast.makeText(c, "Record $timestamp Deleted", Toast.LENGTH_SHORT).show()
-                                } else {
-                                    Toast.makeText(c, "Error Deleting", Toast.LENGTH_SHORT).show()
-                                }
-                            })
-                            .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->  })
-                            .setIcon(R.drawable.ic_warning)
-                            .show()
-                        true
-                    }
-                    else-> true
-                }
-            }
-            popupMenus.show()
-            val popup = PopupMenu::class.java.getDeclaredField("mPopup")
-            popup.isAccessible = true
-            val menu = popup.get(popupMenus)
-            menu.javaClass.getDeclaredMethod("setForceShowIcon",Boolean::class.java)
-                .invoke(menu,true)
-        }
+//        private fun popupMenus(v: View) {
+//            val position = detectionList[adapterPosition]
+//            val popupMenus = PopupMenu(c,v)
+//            popupMenus.inflate(R.menu.reports_menu)
+//            popupMenus.setOnMenuItemClickListener {
+//                when(it.itemId){
+//                    R.id.deleteReport->{
+//                        val newList = detectionList[adapterPosition]
+//                        position.image = newList.image
+//                        position.cameraName = newList.cameraName
+//                        position.timestamp = newList.timestamp
+//                        position.violators = newList.violators
+//                        position.total_violations = newList.total_violations
+//                        position.total_violators = newList.total_violators
+//
+//                        val timestamp = newList.timestamp
+//
+//                        AlertDialog.Builder(c)
+//                            .setTitle("Warning")
+//                            .setMessage("Are you sure you want to delete: $timestamp ?")
+//                            .setPositiveButton("Yes", DialogInterface.OnClickListener{ dialog, which ->
+////                                if (CameraLogsFragment.databaseHelper.deleteDetection(newList.id) || LogsFragment.databaseHelper.deleteDetection(newList.id)) {
+////                                    detectionList.removeAt(adapterPosition)
+////                                    notifyItemRemoved(adapterPosition)
+////                                    notifyItemRangeChanged(adapterPosition,detectionList.size)
+////                                    Toast.makeText(c, "Record $timestamp Deleted", Toast.LENGTH_SHORT).show()
+////                                } else {
+////                                    Toast.makeText(c, "Error Deleting", Toast.LENGTH_SHORT).show()
+////                                }
+//                                detectionList.removeAt(adapterPosition)
+//                                notifyItemRemoved(adapterPosition)
+//                                notifyItemRangeChanged(adapterPosition,detectionList.size)
+//                                Toast.makeText(c, "Record $timestamp Deleted", Toast.LENGTH_SHORT).show()
+//                            })
+//                            .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->  })
+//                            .setIcon(R.drawable.ic_warning)
+//                            .show()
+//                        true
+//                    }
+//                    else-> true
+//                }
+//            }
+//            popupMenus.show()
+//            val popup = PopupMenu::class.java.getDeclaredField("mPopup")
+//            popup.isAccessible = true
+//            val menu = popup.get(popupMenus)
+//            menu.javaClass.getDeclaredMethod("setForceShowIcon",Boolean::class.java)
+//                .invoke(menu,true)
+//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetectionViewHolder {

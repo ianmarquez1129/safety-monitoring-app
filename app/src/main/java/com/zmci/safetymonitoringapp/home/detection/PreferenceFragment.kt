@@ -2,22 +2,21 @@ package com.zmci.safetymonitoringapp.home.detection
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.kusu.loadingbutton.LoadingButton
 import com.zmci.safetymonitoringapp.R
-import com.zmci.safetymonitoringapp.databinding.FragmentHomeBinding
 import com.zmci.safetymonitoringapp.databinding.FragmentPreferenceBinding
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_SERVER_URI
+import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_SET_TOPIC_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
 import org.eclipse.paho.client.mqttv3.IMqttToken
@@ -55,10 +54,11 @@ class PreferenceFragment : Fragment() {
         // Get arguments passed by HomeFragment
         val cameraName = arguments?.getString(CAMERA_NAME_KEY).toString()
         val topic = arguments?.getString(MQTT_TOPIC_KEY).toString()
+        val setTopic = arguments?.getString(MQTT_SET_TOPIC_KEY).toString()
         val clientId = arguments?.getString(MQTT_CLIENT_ID_KEY).toString()
         val serverURI = MQTT_SERVER_URI
 
-        preferenceTitle.text = "Setting Preference for device: $cameraName"
+        preferenceTitle.text = "Setting Preference for device: $topic"
 
         // Open MQTT Broker communication
         mqttClient = MQTTClient(requireContext(), serverURI, clientId)
@@ -229,14 +229,14 @@ class PreferenceFragment : Fragment() {
                     //setup mqtt publish
                     try {
                         if (mqttClient.isConnected()){
-                            mqttClient.publish("ZMCI/$topic/set",
+                            mqttClient.publish(setTopic,
                                 newPreferences,
                                 1,
                                 false,
                                 object : IMqttActionListener {
                                     override fun onSuccess(asyncActionToken: IMqttToken?) {
                                         val msg =
-                                            "Publish message: $newPreferences to topic: ZMCI/$topic/set"
+                                            "Publish message: $newPreferences to topic: $setTopic"
                                         Log.d(this.javaClass.name, msg)
                                     }
 

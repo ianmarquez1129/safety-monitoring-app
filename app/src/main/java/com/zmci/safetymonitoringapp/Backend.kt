@@ -3,6 +3,8 @@ package com.zmci.safetymonitoringapp
 import android.content.Context
 import android.util.Log
 import com.amplifyframework.AmplifyException
+import com.amplifyframework.api.aws.AWSApiPlugin
+import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.auth.AuthChannelEventName
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
@@ -15,6 +17,7 @@ import com.amplifyframework.core.AmplifyConfiguration
 import com.amplifyframework.core.InitializationStatus
 import com.amplifyframework.hub.HubChannel
 import com.amplifyframework.hub.HubEvent
+import org.json.JSONArray
 
 object Backend {
 
@@ -22,6 +25,7 @@ object Backend {
 
     fun initialize(applicationContext: Context) : Backend {
         try {
+            Amplify.addPlugin(AWSApiPlugin())
             Amplify.addPlugin(AWSCognitoAuthPlugin())
             val config = AmplifyConfiguration.builder(applicationContext).devMenuEnabled(false).build()
             Amplify.configure(config, applicationContext)
@@ -145,6 +149,37 @@ object Backend {
             }, {
                 Log.i("FetchUserAttribute", "Error fetch user attribute")
             }
+        )
+    }
+
+    fun getLogs() {
+        val request = RestOptions.builder()
+            .addPath("/getLogs")
+            .build()
+
+        Amplify.API.get(request,
+            { Log.i("MyAmplifyApp", "GET succeeded: ${it.data.asString()}")
+                val data = JSONArray(it.data.asString())
+                for (i in 0 until data.length()){
+                    val item = data.getJSONObject(i)
+                    val totalViolations = item.getString("total_violations")
+                    Log.i("TotalDetections $i", totalViolations)
+                    // for graph
+                }
+            },
+            { Log.e("MyAmplifyApp", "GET failed.", it) }
+        )
+    }
+
+    fun postRequest() {
+        val options = RestOptions.builder()
+            .addPath("/version")
+            .addBody("{\"uuid\":\"ZMCI1\"}".encodeToByteArray())
+            .build()
+
+        Amplify.API.post(options,
+            { Log.i("MyAmplifyApp", "POST succeeded: ${it.data.asString()}") },
+            { Log.e("MyAmplifyApp", "POST failed", it) }
         )
     }
 

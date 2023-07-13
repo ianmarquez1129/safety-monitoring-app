@@ -19,9 +19,9 @@ import androidx.fragment.app.Fragment
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.database.DatabaseHelper
 import com.zmci.safetymonitoringapp.databinding.FragmentClientBinding
-import com.zmci.safetymonitoringapp.home.detection.model.Detection
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
+import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_PUB_TOPIC_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_SERVER_URI
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
@@ -76,11 +76,12 @@ class ClientFragment : Fragment() {
         // Get arguments passed by HomeFragment
         val cameraName = arguments?.getString(CAMERA_NAME_KEY).toString()
         val topic = arguments?.getString(MQTT_TOPIC_KEY).toString()
+        val pubTopic = arguments?.getString(MQTT_PUB_TOPIC_KEY).toString()
         val clientId = arguments?.getString(MQTT_CLIENT_ID_KEY).toString()
         val serverURI = MQTT_SERVER_URI
 
         // Set camera name as title
-        cameraClientName.text = cameraName
+        cameraClientName.text = "$cameraName/$topic"
 
         // Open MQTT Broker communication
         mqttClient = MQTTClient(requireContext(), serverURI, clientId)
@@ -90,11 +91,11 @@ class ClientFragment : Fragment() {
             try {
                 if (mqttClient.isConnected()) {
                     mqttClient.subscribe(
-                        "ZMCI/$topic/notif",
+                        pubTopic,
                         1,
                         object : IMqttActionListener {
                             override fun onSuccess(asyncActionToken: IMqttToken?) {
-                                val msg = "Subscribed to: ZMCI/$topic/notif"
+                                val msg = "Subscribed to: $pubTopic"
                                 Log.d(this.javaClass.name, msg)
                             }
 
@@ -102,7 +103,7 @@ class ClientFragment : Fragment() {
                                 asyncActionToken: IMqttToken?,
                                 exception: Throwable?
                             ) {
-                                Log.d(this.javaClass.name, "Failed to subscribe: ZMCI/$topic/notif")
+                                Log.d(this.javaClass.name, "Failed to subscribe: $pubTopic")
                             }
                         })
                 } else {
@@ -199,7 +200,7 @@ class ClientFragment : Fragment() {
                                     tvCameraDetails.typeface = Typeface.DEFAULT_BOLD
                                     tvCameraDetails.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
                                     tvCameraDetails.text =
-                                        "Device Name: $cameraName\n"
+                                        "Device Name: $cameraName/$topic\n"
                                     // Display the TextView in LinearLayout view
                                     llCameraDetails.addView(tvCameraDetails)
 
@@ -467,14 +468,14 @@ class ClientFragment : Fragment() {
                                     e.printStackTrace()
                                 }
                                 //Save data to database
-                                val detectionDB = Detection()
-                                detectionDB.image = imageData
-                                detectionDB.cameraName = cameraName
-                                detectionDB.timestamp = timestampData
-                                detectionDB.violators = violatorsData
-                                detectionDB.total_violations = totalViolations
-                                detectionDB.total_violators = totalViolators
-                                databaseHelper.addDetection(context, detectionDB)
+//                                val detectionDB = Detection()
+//                                detectionDB.image = imageData
+//                                detectionDB.cameraName = cameraName
+//                                detectionDB.timestamp = timestampData
+//                                detectionDB.violators = violatorsData
+//                                detectionDB.total_violations = totalViolations
+//                                detectionDB.total_violators = totalViolators
+//                                databaseHelper.addDetection(context, detectionDB)
                             } catch (e : Exception) {
                                 e.printStackTrace()
                             }

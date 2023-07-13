@@ -3,7 +3,6 @@ package com.zmci.safetymonitoringapp.home.detection.adapter
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +19,7 @@ import com.zmci.safetymonitoringapp.home.HomeFragment
 import com.zmci.safetymonitoringapp.home.detection.model.CameraData
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
+import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_SET_TOPIC_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
 
 class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
@@ -46,8 +46,10 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
                         position.cameraName = newList.cameraName
                         position.MQTT_TOPIC = newList.MQTT_TOPIC
                         val cameraName = newList.cameraName
+                        val topic = newList.MQTT_TOPIC
                         val cameraNameBundle = bundleOf(
-                            CAMERA_NAME_KEY to cameraName
+                            CAMERA_NAME_KEY to cameraName,
+                            MQTT_TOPIC_KEY to topic
                         )
                         v.findNavController().navigate(R.id.action_navigation_home_to_fragment_camera_logs, cameraNameBundle)
                         true
@@ -55,13 +57,15 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
                     R.id.setPreference->{
                         val newList = cameraList[adapterPosition]
                         position.cameraName = newList.cameraName
-                        position.MQTT_TOPIC = newList.MQTT_TOPIC
+                        position.MQTT_SET_TOPIC = newList.MQTT_SET_TOPIC
                         val cameraName = newList.cameraName
                         val cameraTopic = newList.MQTT_TOPIC
+                        val cameraSetTopic = newList.MQTT_SET_TOPIC
                         val clientID = newList.MQTT_CLIENT_ID
                         val cameraNameBundle = bundleOf(
                             CAMERA_NAME_KEY to cameraName,
                             MQTT_TOPIC_KEY to cameraTopic,
+                            MQTT_SET_TOPIC_KEY to cameraSetTopic,
                             MQTT_CLIENT_ID_KEY to clientID
                         )
                         v.findNavController().navigate(R.id.action_navigation_home_to_fragment_preference, cameraNameBundle)
@@ -72,31 +76,25 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
 
                         val newList = cameraList[adapterPosition]
                         position.cameraName = newList.cameraName
-                        position.MQTT_TOPIC = newList.MQTT_TOPIC
                         val updateDeviceName : EditText = v.findViewById(R.id.updateDeviceName)
-                        val updateUniqueID : EditText = v.findViewById(R.id.updateUniqueID)
                         updateDeviceName.hint = newList.cameraName
-                        updateUniqueID.hint = newList.MQTT_TOPIC
 
 
                         AlertDialog.Builder(c)
                             .setView(v)
                             .setPositiveButton("Update"){
                                     dialog,_->
-                                if (updateDeviceName.text.toString().isEmpty() || updateUniqueID.text.toString().isEmpty()) {
+                                if (updateDeviceName.text.toString().isEmpty()) {
                                     Toast.makeText(c, "Fill out empty fields", Toast.LENGTH_SHORT)
                                         .show()
                                 } else {
                                     val isUpdate = HomeFragment.databaseHelper.updateCamera(
                                         newList.id.toString(),
-                                        updateDeviceName.text.toString(),
-                                        updateUniqueID.text.toString()
+                                        updateDeviceName.text.toString()
                                     )
                                     if (isUpdate) {
                                         cameraList[adapterPosition].cameraName =
                                             updateDeviceName.text.toString()
-                                        cameraList[adapterPosition].MQTT_TOPIC =
-                                            updateUniqueID.text.toString()
                                         notifyDataSetChanged()
                                         Toast.makeText(
                                             c,
@@ -121,7 +119,6 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
                     R.id.delete->{
                         val newList = cameraList[adapterPosition]
                         position.cameraName = newList.cameraName
-                        position.MQTT_TOPIC = newList.MQTT_TOPIC
                         val cameraName = newList.cameraName
 
                         AlertDialog.Builder(c)

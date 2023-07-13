@@ -12,14 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnDeleteAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="15dp"
-        android:src="@drawable/ic_delete"
-        app:tint="@color/dark_gray"
-        app:backgroundTint="#d3d3d3"/>
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/btnDeleteAll"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:src="@drawable/ic_delete"-->
+<!--        app:tint="@color/dark_gray"-->
+<!--        app:backgroundTint="#d3d3d3"/>-->
 </RelativeLayout>

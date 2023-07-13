@@ -1,15 +1,19 @@
 package com.zmci.safetymonitoringapp.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amplifyframework.api.rest.RestOptions
+import com.amplifyframework.core.Amplify
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -18,15 +22,18 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.R
+import com.zmci.safetymonitoringapp.UserData
 import com.zmci.safetymonitoringapp.database.DatabaseHelper
 import com.zmci.safetymonitoringapp.databinding.FragmentHomeBinding
 import com.zmci.safetymonitoringapp.home.detection.adapter.CameraAdapter
 import com.zmci.safetymonitoringapp.home.detection.model.Detection
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
+import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_PUB_TOPIC_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
-import com.zmci.safetymonitoringapp.logs.LogsFragment
+import org.json.JSONArray
 
 class HomeFragment : Fragment() {
 
@@ -59,6 +66,13 @@ class HomeFragment : Fragment() {
         retrieveRecordsAndPopulateCharts()
 
         val addingBtn = view.findViewById<FloatingActionButton>(R.id.addingBtn)
+        val generatePDF = view.findViewById<FloatingActionButton>(R.id.generatePDF)
+
+        generatePDF.setOnClickListener {
+            Backend.getLogs()
+            Backend.postRequest()
+        }
+
         addingBtn.setOnClickListener{
             checkAddDevice()
         }
@@ -80,11 +94,13 @@ class HomeFragment : Fragment() {
                 override fun onItemClick(position: Int) {
                     val cameraName = cameraList[position].cameraName
                     val topic = cameraList[position].MQTT_TOPIC
+                    val pubTopic = cameraList[position].MQTT_PUB_TOPIC
                     val clientID = cameraList[position].MQTT_CLIENT_ID
 
                     val mqttCredentialsBundle = bundleOf(
                         CAMERA_NAME_KEY to cameraName,
                         MQTT_TOPIC_KEY to topic,
+                        MQTT_PUB_TOPIC_KEY to pubTopic,
                         MQTT_CLIENT_ID_KEY to clientID
                     )
                     findNavController().navigate(
@@ -112,20 +128,43 @@ class HomeFragment : Fragment() {
     }
 
     private fun retrieveRecordsAndPopulateCharts(){
-        val detections: List<Detection> = databaseHelper.getAllDetection(requireContext())
+        val request = RestOptions.builder()
+            .addPath("/getLogs")
+            .build()
+        val detectionList = ArrayList<Detection>()
+        Amplify.API.get(request,
+            { Log.i("MyAmplifyApp", "GET succeeded: ${it.data.asString()}")
+                val data = JSONArray(it.data.asString())
 
-        val detectionId = Array<Int>(detections.size){ 0 }
-        val totalViolators = Array<Int>(detections.size){ 0 }
-        val totalViolations = Array<Int>(detections.size){ 0 }
+                for (i in 0 until data.length()){
+                    val detection = Detection()
+                    val item = data.getJSONObject(i)
+                    detection.id = i
+                    detection.image = item.getString("image")
+                    detection.cameraName = item.getString("uuid")
+                    detection.timestamp = item.getString("timestamp")
+                    detection.violators = item.getString("violators")
+                    detection.total_violators = item.getString("total_violators")
+                    detection.total_violations = item.getString("total_violations")
+                    detectionList.add(detection)
+                }
+                val detections: List<Detection> = detectionList
+                val totalViolations = Array<Int>(detections.size) { 0 }
+                var index = 0
+                for (a in detections) {
+                    totalViolations[index] = a.total_violations.toInt()
+                    index++
+                }
+                UserData.setChart(totalViolations)
 
-        var index = 0
-        for (a in detections) {
-            detectionId[index] = a.id
-            totalViolators[index] = a.total_violators.toInt()
-            totalViolations[index] = a.total_violations.toInt()
-            index++
-        }
-        populateLineChart(totalViolations)
+            },
+            { Log.e("MyAmplifyApp", "GET failed.", it) }
+        )
+
+        UserData.chart.observe(this.viewLifecycleOwner, Observer<Array<Int>> { chart ->
+            populateLineChart(chart)
+            Log.i("retrieveRecords", chart.contentDeepToString())
+        })
 
 
     }
