@@ -17,6 +17,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             + COLUMN_SERVER_TOPIC + " TEXT,"
             + COLUMN_SERVER_PUB_TOPIC + " TEXT,"
             + COLUMN_SERVER_SET_TOPIC + " TEXT,"
+            + COLUMN_DEVICE_STATUS + " TEXT,"
             + COLUMN_CLIENT_ID + " TEXT"+ ")")
 //    private val CREATE_DETECTION_TABLE = ("CREATE TABLE " + TABLE_DETECTION + "("
 //            + COLUMN_DETECTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -67,6 +68,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 camera.MQTT_PUB_TOPIC = cursor.getString(cursor.getColumnIndex(COLUMN_SERVER_PUB_TOPIC))
                 camera.MQTT_SET_TOPIC = cursor.getString(cursor.getColumnIndex(COLUMN_SERVER_SET_TOPIC))
                 camera.MQTT_CLIENT_ID = cursor.getString(cursor.getColumnIndex(COLUMN_CLIENT_ID))
+                camera.deviceStatus = cursor.getString(cursor.getColumnIndex(COLUMN_DEVICE_STATUS))
                 cameraList.add(camera)
                 cursor.moveToNext()
             }
@@ -91,6 +93,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(/* key = */ COLUMN_SERVER_PUB_TOPIC, /* value = */ camera.MQTT_PUB_TOPIC)
         values.put(/* key = */ COLUMN_SERVER_SET_TOPIC, /* value = */ camera.MQTT_SET_TOPIC)
         values.put(/* key = */ COLUMN_CLIENT_ID, /* value = */ camera.MQTT_CLIENT_ID)
+        values.put(/* key = */ COLUMN_DEVICE_STATUS, /* value = */ camera.deviceStatus)
 
         try {
             db.insert(TABLE_CAMERA, null, values)
@@ -110,6 +113,26 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val values = ContentValues()
         var result: Boolean
         values.put(COLUMN_CAMERA_NAME, cameraName)
+        try {
+            db.update(TABLE_CAMERA, values, "$COLUMN_CAMERA_ID = ?", arrayOf(id))
+            result = true
+        } catch (e : Exception){
+            Log.e(ContentValues.TAG, "Error Updating")
+            result = false
+        }
+        return result
+    }
+
+    /**
+     * This method to update camera record
+     *
+     * @param camera
+     */
+    fun updateDeviceStatus(id : String, deviceStatus: String) : Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        var result: Boolean
+        values.put(COLUMN_DEVICE_STATUS, deviceStatus)
         try {
             db.update(TABLE_CAMERA, values, "$COLUMN_CAMERA_ID = ?", arrayOf(id))
             result = true
@@ -265,7 +288,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     companion object {
 
         // Database Version
-        private val DATABASE_VERSION = 3
+        private val DATABASE_VERSION = 4
 
         // Database Name
         private val DATABASE_NAME = "ZMCI_PPE_DB.db"
@@ -280,6 +303,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private val COLUMN_SERVER_PUB_TOPIC = "server_pub_topic"
         private val COLUMN_SERVER_SET_TOPIC = "server_set_topic"
         private val COLUMN_CLIENT_ID = "client_id"
+        private val COLUMN_DEVICE_STATUS = "device_status"
 
         // Detection table name
 //        private val TABLE_DETECTION = "detection"

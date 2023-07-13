@@ -17,6 +17,7 @@ import com.amplifyframework.core.AmplifyConfiguration
 import com.amplifyframework.core.InitializationStatus
 import com.amplifyframework.hub.HubChannel
 import com.amplifyframework.hub.HubEvent
+import com.zmci.safetymonitoringapp.home.HomeFragment
 import org.json.JSONArray
 
 object Backend {
@@ -179,6 +180,20 @@ object Backend {
 
         Amplify.API.post(options,
             { Log.i("MyAmplifyApp", "POST succeeded: ${it.data.asString()}") },
+            { Log.e("MyAmplifyApp", "POST failed", it) }
+        )
+    }
+
+    fun getStatus(options: RestOptions) {
+        Amplify.API.post(options,
+            { Log.i("MyAmplifyApp", "POST succeeded: ${it.data.asString()}")
+                val data = JSONArray(it.data.asString())
+                for (i in 0 until data.length()) {
+                    val item = data.getJSONObject(i)
+                    val status = item.getString("status")
+                    UserData.setDeviceStatus(status)
+                }
+            },
             { Log.e("MyAmplifyApp", "POST failed", it) }
         )
     }

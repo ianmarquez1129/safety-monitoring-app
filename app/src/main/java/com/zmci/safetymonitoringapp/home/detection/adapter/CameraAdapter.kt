@@ -3,6 +3,8 @@ package com.zmci.safetymonitoringapp.home.detection.adapter
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,20 +14,28 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.amplifyframework.api.rest.RestOptions
+import com.amplifyframework.core.Amplify
+import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.R
+import com.zmci.safetymonitoringapp.UserData
 import com.zmci.safetymonitoringapp.home.HomeFragment
 import com.zmci.safetymonitoringapp.home.detection.model.CameraData
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_SET_TOPIC_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
+import org.json.JSONArray
 
 class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
     inner class CameraViewHolder(val v: View, listener: onItemClickListener):RecyclerView.ViewHolder(v){
         var name: TextView = v.findViewById(R.id.mTitle)
         var mTopic: TextView = v.findViewById(R.id.mTopic)
+        var mStatus: TextView = v.findViewById(R.id.mStatus)
         var mMenus: ImageView = v.findViewById(R.id.mMenus)
 
         init {
@@ -41,6 +51,32 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
             popupMenus.inflate(R.menu.show_menu)
             popupMenus.setOnMenuItemClickListener {
                 when(it.itemId){
+                    R.id.refresh->{
+                        val newList = cameraList[adapterPosition]
+                        val options = RestOptions.builder()
+                            .addPath("/getStatus")
+                            .addBody("{\"uuid\":\"${newList.MQTT_TOPIC}\"}".encodeToByteArray())
+                            .build()
+
+                        Backend.getStatus(options)
+
+                        var status = ""
+                        UserData.deviceStatus.observe(c as LifecycleOwner, Observer<String>{deviceStatus ->
+                            status = deviceStatus
+                        })
+                        val isUpdate = HomeFragment.databaseHelper.updateDeviceStatus(
+                            newList.id.toString(),
+                            status
+                        )
+                        if (isUpdate) {
+                            cameraList[adapterPosition].deviceStatus =
+                                status
+                            notifyDataSetChanged()
+                        } else {
+                            Log.i("Error", "Error updating")
+                        }
+                        true
+                    }
                     R.id.viewLogs->{
                         val newList = cameraList[adapterPosition]
                         position.cameraName = newList.cameraName
@@ -159,6 +195,13 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
 
     override fun onBindViewHolder(holder: CameraViewHolder, position: Int) {
         val newList = cameraList[position]
+        if (newList.deviceStatus == "online"){
+            holder.mStatus.setTextColor(Color.GREEN)
+            holder.mStatus.text = newList.deviceStatus
+        } else {
+            holder.mStatus.setTextColor(Color.RED)
+            holder.mStatus.text = "offline"
+        }
         holder.name.text = newList.cameraName
         holder.mTopic.text = newList.MQTT_TOPIC
     }
