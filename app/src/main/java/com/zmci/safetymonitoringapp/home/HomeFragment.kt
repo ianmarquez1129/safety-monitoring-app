@@ -1,11 +1,18 @@
 package com.zmci.safetymonitoringapp.home
 
+import android.content.DialogInterface
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,7 +29,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.UserData
 import com.zmci.safetymonitoringapp.database.DatabaseHelper
@@ -34,6 +40,8 @@ import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_PUB_TOPIC_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
 import org.json.JSONArray
+import java.io.File
+import java.io.FileOutputStream
 
 class HomeFragment : Fragment() {
 
@@ -45,9 +53,13 @@ class HomeFragment : Fragment() {
     private lateinit var cameraAdapter: CameraAdapter
     private lateinit var ourLineChart: LineChart
 
+    private val STORAGE_REQUEST_CODE_EXPORT = 1
+    private lateinit var storagePermission:Array<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         databaseHelper = DatabaseHelper(this.requireContext())
+        storagePermission = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     override fun onCreateView(
@@ -69,8 +81,7 @@ class HomeFragment : Fragment() {
         val generatePDF = view.findViewById<FloatingActionButton>(R.id.generatePDF)
 
         generatePDF.setOnClickListener {
-            Backend.getLogs()
-            Backend.postRequest()
+            exportPDF()
         }
 
         addingBtn.setOnClickListener{
@@ -114,6 +125,90 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun exportPDF() {
+
+        val exportDialog = AlertDialog.Builder(this.requireContext())
+
+        exportDialog.setTitle("Generate PDF")
+        exportDialog.setMessage("Are you sure you want to generate PDF?")
+        exportDialog.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, _ ->
+            if (checkStoragePermission()){
+                // permission allowed, do export
+                exportPDFProcess()
+            } else {
+                requestStoragePermissionExport()
+            }
+            dialog.dismiss()
+        })
+        exportDialog.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        exportDialog.create()
+        exportDialog.show()
+    }
+
+    private fun exportPDFProcess() {
+        val request = RestOptions.builder()
+            .addPath("/getPDF")
+            .build()
+
+        Amplify.API.get(request,
+            { Log.i("MyAmplifyApp", "GET succeeded: ${it.data.asString()}")
+                // Decode the base64 response
+//                val decodedBytes: ByteArray = Base64.decode(it.data.asString(), Base64.DEFAULT)
+                generatePDFFromBase64(it.data.asString(),"OUTPUT")
+            },
+            { Log.e("MyAmplifyApp", "GET failed.", it) }
+        )
+    }
+    private fun checkStoragePermission():Boolean {
+        return ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED)
+    }
+    private fun requestStoragePermissionExport(){
+        ActivityCompat.requestPermissions(requireActivity(),storagePermission,STORAGE_REQUEST_CODE_EXPORT)
+    }
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        // handle permission result
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults)
+
+        when(requestCode){
+            STORAGE_REQUEST_CODE_EXPORT -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    exportPDFProcess()
+                } else {
+                    Toast.makeText(this.requireContext(),"Permission denied...", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+    fun generatePDFFromBase64(base64: String, fileName: String) {
+        try {
+            val decodedBytes: ByteArray = Base64.decode(base64, Base64.DEFAULT)
+            val fos = FileOutputStream(getFilePath(fileName))
+            fos.write(decodedBytes)
+            fos.flush()
+            fos.close()
+
+        } catch (e: Exception) {
+            Log.e("TAG", "Failed to generate pdf from base64: ${e.localizedMessage}")
+        }
+    }
+
+
+    fun getFilePath(filename: String): String {
+        val file =
+            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+        return file.absolutePath.toString() + "/" + filename + ".pdf"
+    }
+
     private fun checkAddDevice() {
         val deviceDialog = AlertDialog.Builder(this.requireContext())
         deviceDialog.setTitle("Add a device")
@@ -134,28 +229,31 @@ class HomeFragment : Fragment() {
         val detectionList = ArrayList<Detection>()
         Amplify.API.get(request,
             { Log.i("MyAmplifyApp", "GET succeeded: ${it.data.asString()}")
-                val data = JSONArray(it.data.asString())
-
-                for (i in 0 until data.length()){
-                    val detection = Detection()
-                    val item = data.getJSONObject(i)
-                    detection.id = i
-                    detection.image = item.getString("image")
-                    detection.cameraName = item.getString("uuid")
-                    detection.timestamp = item.getString("timestamp")
-                    detection.violators = item.getString("violators")
-                    detection.total_violators = item.getString("total_violators")
-                    detection.total_violations = item.getString("total_violations")
-                    detectionList.add(detection)
+                try {
+                    val data = JSONArray(it.data.asString())
+                    for (i in 0 until data.length()) {
+                        val detection = Detection()
+                        val item = data.getJSONObject(i)
+                        detection.id = i
+                        detection.image = item.getString("image")
+                        detection.cameraName = item.getString("uuid")
+                        detection.timestamp = item.getString("timestamp")
+                        detection.violators = item.getString("violators")
+                        detection.total_violators = item.getString("total_violators")
+                        detection.total_violations = item.getString("total_violations")
+                        detectionList.add(detection)
+                    }
+                    val detections: List<Detection> = detectionList
+                    val totalViolations = Array<Int>(detections.size) { 0 }
+                    var index = 0
+                    for (a in detections) {
+                        totalViolations[index] = a.total_violations.toInt()
+                        index++
+                    }
+                    UserData.setChart(totalViolations)
+                } catch (e:Exception) {
+                    e.printStackTrace()
                 }
-                val detections: List<Detection> = detectionList
-                val totalViolations = Array<Int>(detections.size) { 0 }
-                var index = 0
-                for (a in detections) {
-                    totalViolations[index] = a.total_violations.toInt()
-                    index++
-                }
-                UserData.setChart(totalViolations)
 
             },
             { Log.e("MyAmplifyApp", "GET failed.", it) }

@@ -74,6 +74,9 @@ class CameraCredentialsFragment : Fragment() {
                                     "}").encodeToByteArray()
                         )
                         .build()
+                    Log.i("OPTIONS","{\"uuid\":\"${deviceUniqueID.text}\"," +
+                            "\"password\":\"${devicePassword.text}\"" +
+                            "}")
 
                     Amplify.API.post(options,
                         {
@@ -83,25 +86,41 @@ class CameraCredentialsFragment : Fragment() {
                                 for (i in 0 until data.length()) {
                                     val camera = CameraData()
                                     val item = data.getJSONObject(i)
-                                    camera.cameraName = deviceName.text.toString()
-                                    camera.MQTT_CLIENT_ID = java.util.UUID.randomUUID().toString()
-                                    camera.MQTT_TOPIC = deviceUniqueID.text.toString()
-                                    camera.MQTT_PUB_TOPIC = item.getString("pub_topic")
-                                    camera.MQTT_SET_TOPIC = item.getString("set_topic")
-                                    databaseHelper.addCamera(this.requireContext(), camera)
+                                    val status = item.getString("status")
+                                    if (status == "success") {
+                                        camera.cameraName = deviceName.text.toString()
+                                        camera.MQTT_CLIENT_ID =
+                                            java.util.UUID.randomUUID().toString()
+                                        camera.MQTT_TOPIC = deviceUniqueID.text.toString()
+                                        camera.MQTT_PUB_TOPIC = item.getString("pub_topic")
+                                        camera.MQTT_SET_TOPIC = item.getString("set_topic")
+                                        databaseHelper.addCamera(this.requireContext(), camera)
 
-                                    val snackBarView = Snackbar.make(binding.root, "Device Added Successfully" , Snackbar.LENGTH_LONG)
-                                    val view1 = snackBarView.view
-                                    val params = view1.layoutParams as FrameLayout.LayoutParams
-                                    params.gravity = Gravity.TOP
-                                    view1.layoutParams = params
-                                    snackBarView.setBackgroundTint(Color.GREEN)
-                                    snackBarView.show()
+                                        val snackBarView = Snackbar.make(
+                                            binding.root,
+                                            "Device Added Successfully",
+                                            Snackbar.LENGTH_LONG
+                                        )
+                                        val view1 = snackBarView.view
+                                        val params = view1.layoutParams as FrameLayout.LayoutParams
+                                        params.gravity = Gravity.TOP
+                                        view1.layoutParams = params
+                                        snackBarView.setBackgroundTint(Color.GREEN)
+                                        snackBarView.show()
+                                        buttonCreate.hideLoading()
+                                        val i = Intent(this.context, DashboardActivity::class.java)
+                                        startActivity(i)
+                                        activity?.finish()
+                                    } else {
+                                        val snackBarView = Snackbar.make(binding.root, "Device credentials are invalid" , Snackbar.LENGTH_LONG)
+                                        val view1 = snackBarView.view
+                                        val params = view1.layoutParams as FrameLayout.LayoutParams
+                                        params.gravity = Gravity.TOP
+                                        view1.layoutParams = params
+                                        snackBarView.setBackgroundTint(Color.RED)
+                                        snackBarView.show()
+                                    }
                                 }
-                                buttonCreate.hideLoading()
-                                val i = Intent(this.context, DashboardActivity::class.java)
-                                startActivity(i)
-                                activity?.finish()
                             } catch (e: Exception) {
                                 e.printStackTrace()
                                 val snackBarView = Snackbar.make(binding.root, "Device credentials are invalid" , Snackbar.LENGTH_LONG)

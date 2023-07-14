@@ -149,12 +149,12 @@ class CameraLogsFragment : Fragment() {
         datetimeSubmit.setOnClickListener {
             try {
                 val options = RestOptions.builder()
-                    .addPath("/version")
+                    .addPath("/getLogs")
                     .addBody(("{" +
-                            "\"uuid\":\"$topic\"," +
-                            "\"start_datetime\":\"$savedYearStart-$savedMonthStartPad-$savedDayStartPad" + "_" + "$savedHourStartPad-$savedMinuteStartPad-00\"," +
-                            "\"end_datetime\":\"$savedYearEnd-$savedMonthEndPad-$savedDayEndPad" + "_" + "$savedHourEndPad-$savedMinuteEndPad-00\"" +
-                            "}").encodeToByteArray())
+                        "\"uuid\":\"$topic\"," +
+                        "\"start_datetime\":\"$savedYearStart-$savedMonthStartPad-$savedDayStartPad" + "_" + "$savedHourStartPad-$savedMinuteStartPad-00\"," +
+                        "\"end_datetime\":\"$savedYearEnd-$savedMonthEndPad-$savedDayEndPad" + "_" + "$savedHourEndPad-$savedMinuteEndPad-00\"" +
+                        "}").encodeToByteArray())
                     .build()
                 val detectionList = ArrayList<Detection>()
                 Amplify.API.post(options,

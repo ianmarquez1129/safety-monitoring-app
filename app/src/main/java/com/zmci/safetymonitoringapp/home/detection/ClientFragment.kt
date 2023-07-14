@@ -200,7 +200,7 @@ class ClientFragment : Fragment() {
                                     tvCameraDetails.typeface = Typeface.DEFAULT_BOLD
                                     tvCameraDetails.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
                                     tvCameraDetails.text =
-                                        "Device Name: $cameraName/$topic\n"
+                                        "Device Name: $cameraName\n"
                                     // Display the TextView in LinearLayout view
                                     llCameraDetails.addView(tvCameraDetails)
 
@@ -218,91 +218,91 @@ class ClientFragment : Fragment() {
                                     //violators extract
                                     for (i in 0 until violatorsObject.length()) {
                                         val item = violatorsObject.getJSONObject(i)
-                                        val itemPersonInfo = item.getString("person_info")
-                                        // extract itemPersonInfo
-                                        val itemPersonInfoObject = JSONArray(itemPersonInfo)
-
-                                        // If the current person has no 'face' and is not recognized,
-                                        // it is considered "Unknown person".
-                                        if (itemPersonInfoObject.length() == 0) {
-                                            // Create TextView for "Unknown person"
-                                            val tvPerson = TextView(context)
-                                            tvPerson.layoutParams = ViewGroup.LayoutParams(
-                                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                                ViewGroup.LayoutParams.WRAP_CONTENT
-                                            )
-                                            tvPerson.textSize = 20f
-                                            tvPerson.typeface = Typeface.DEFAULT_BOLD
-                                            tvPerson.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
-                                            tvPerson.text = "Unknown person"
-                                            // Display the TextView in LinearLayout view
-                                            if (i % 2 == 0) {
-                                                llDetails.addView(tvPerson)
-                                            } else {
-                                                llDetails2.addView(tvPerson)
-                                            }
-                                        }
-
-                                        // If the current person has a detected 'face'...
-                                        for (j in 0 until itemPersonInfoObject.length()) {
-                                            val itemLength = itemPersonInfoObject.getJSONObject(j).length()
-                                            // If the person has been recognized via face recognition
-                                            if (itemLength > 1) {
-                                                val itemPI = itemPersonInfoObject.getJSONObject(j)
-                                                val personId = itemPI.getString("person_id")
-                                                val firstName = itemPI.getString("first_name")
-                                                val middleName = itemPI.getString("middle_name")
-                                                val lastName = itemPI.getString("last_name")
-                                                val jobTitle = itemPI.getString("job_title")
-                                                val overlaps = itemPI.getString("overlaps")
-                                                val tvPersonInfo = TextView(context)
-                                                tvPersonInfo.layoutParams = ViewGroup.LayoutParams(
-                                                    ViewGroup.LayoutParams.MATCH_PARENT,
-                                                    ViewGroup.LayoutParams.WRAP_CONTENT
-                                                )
-                                                tvPersonInfo.textSize = 20f
-                                                tvPersonInfo.typeface = Typeface.DEFAULT_BOLD
-                                                tvPersonInfo.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
-                                                tvPersonInfo.text =
-                                                    "ID: $personId\n" +
-                                                            "Name: $firstName $middleName $lastName\n" +
-                                                            "Job Title: $jobTitle\n" +
-                                                            "Overlaps: $overlaps"
-                                                if (i % 2 == 0) {
-                                                    llDetails.addView(tvPersonInfo)
-                                                } else {
-                                                    llDetails2.addView(tvPersonInfo)
-                                                }
-
-                                            }
-                                            // If the person is not recognized via 'face recognition'
-                                            // the person is considered "Unknown"
-                                            else {
-                                                val itemPI = itemPersonInfoObject.getJSONObject(j)
-                                                val overlaps = itemPI.getString("overlaps")
-                                                // Create TextView for "Unknown person"
-                                                val tvPersonUnknown = TextView(context)
-                                                tvPersonUnknown.layoutParams =
-                                                    ViewGroup.LayoutParams(
-                                                        ViewGroup.LayoutParams.MATCH_PARENT,
-                                                        ViewGroup.LayoutParams.WRAP_CONTENT
-                                                    )
-                                                tvPersonUnknown.textSize = 20f
-                                                tvPersonUnknown.typeface = Typeface.DEFAULT_BOLD
-                                                tvPersonUnknown.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
-                                                tvPersonUnknown.text =
-                                                    "Unknown person\n" +
-                                                            "Overlaps: $overlaps"
-                                                // Display the TextView in LinearLayout view
-                                                if (i % 2 == 0) {
-                                                    llDetails.addView(tvPersonUnknown)
-                                                } else {
-                                                    llDetails2.addView(tvPersonUnknown)
-                                                }
-
-                                            }
-
-                                        }
+//                                        val itemPersonInfo = item.getString("person_info")
+//                                        // extract itemPersonInfo
+//                                        val itemPersonInfoObject = JSONArray(itemPersonInfo)
+//
+//                                        // If the current person has no 'face' and is not recognized,
+//                                        // it is considered "Unknown person".
+//                                        if (itemPersonInfoObject.length() == 0) {
+//                                            // Create TextView for "Unknown person"
+//                                            val tvPerson = TextView(context)
+//                                            tvPerson.layoutParams = ViewGroup.LayoutParams(
+//                                                ViewGroup.LayoutParams.MATCH_PARENT,
+//                                                ViewGroup.LayoutParams.WRAP_CONTENT
+//                                            )
+//                                            tvPerson.textSize = 20f
+//                                            tvPerson.typeface = Typeface.DEFAULT_BOLD
+//                                            tvPerson.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+//                                            tvPerson.text = "Unknown person"
+//                                            // Display the TextView in LinearLayout view
+//                                            if (i % 2 == 0) {
+//                                                llDetails.addView(tvPerson)
+//                                            } else {
+//                                                llDetails2.addView(tvPerson)
+//                                            }
+//                                        }
+//
+//                                        // If the current person has a detected 'face'...
+//                                        for (j in 0 until itemPersonInfoObject.length()) {
+//                                            val itemLength = itemPersonInfoObject.getJSONObject(j).length()
+//                                            // If the person has been recognized via face recognition
+//                                            if (itemLength > 1) {
+//                                                val itemPI = itemPersonInfoObject.getJSONObject(j)
+//                                                val personId = itemPI.getString("person_id")
+//                                                val firstName = itemPI.getString("first_name")
+//                                                val middleName = itemPI.getString("middle_name")
+//                                                val lastName = itemPI.getString("last_name")
+//                                                val jobTitle = itemPI.getString("job_title")
+//                                                val overlaps = itemPI.getString("overlaps")
+//                                                val tvPersonInfo = TextView(context)
+//                                                tvPersonInfo.layoutParams = ViewGroup.LayoutParams(
+//                                                    ViewGroup.LayoutParams.MATCH_PARENT,
+//                                                    ViewGroup.LayoutParams.WRAP_CONTENT
+//                                                )
+//                                                tvPersonInfo.textSize = 20f
+//                                                tvPersonInfo.typeface = Typeface.DEFAULT_BOLD
+//                                                tvPersonInfo.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+//                                                tvPersonInfo.text =
+//                                                    "ID: $personId\n" +
+//                                                            "Name: $firstName $middleName $lastName\n" +
+//                                                            "Job Title: $jobTitle\n" +
+//                                                            "Overlaps: $overlaps"
+//                                                if (i % 2 == 0) {
+//                                                    llDetails.addView(tvPersonInfo)
+//                                                } else {
+//                                                    llDetails2.addView(tvPersonInfo)
+//                                                }
+//
+//                                            }
+//                                            // If the person is not recognized via 'face recognition'
+//                                            // the person is considered "Unknown"
+//                                            else {
+//                                                val itemPI = itemPersonInfoObject.getJSONObject(j)
+//                                                val overlaps = itemPI.getString("overlaps")
+//                                                // Create TextView for "Unknown person"
+//                                                val tvPersonUnknown = TextView(context)
+//                                                tvPersonUnknown.layoutParams =
+//                                                    ViewGroup.LayoutParams(
+//                                                        ViewGroup.LayoutParams.MATCH_PARENT,
+//                                                        ViewGroup.LayoutParams.WRAP_CONTENT
+//                                                    )
+//                                                tvPersonUnknown.textSize = 20f
+//                                                tvPersonUnknown.typeface = Typeface.DEFAULT_BOLD
+//                                                tvPersonUnknown.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+//                                                tvPersonUnknown.text =
+//                                                    "Unknown person\n" +
+//                                                            "Overlaps: $overlaps"
+//                                                // Display the TextView in LinearLayout view
+//                                                if (i % 2 == 0) {
+//                                                    llDetails.addView(tvPersonUnknown)
+//                                                } else {
+//                                                    llDetails2.addView(tvPersonUnknown)
+//                                                }
+//
+//                                            }
+//
+//                                        }
 
                                         // Set the person's ID, and detections
                                         val personUniqueID = item.getString("id")

@@ -19,7 +19,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.amplifyframework.api.rest.RestOptions
-import com.amplifyframework.core.Amplify
 import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.UserData
@@ -29,7 +28,6 @@ import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_CLIENT_ID_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_SET_TOPIC_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.MQTT_TOPIC_KEY
-import org.json.JSONArray
 
 class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
     inner class CameraViewHolder(val v: View, listener: onItemClickListener):RecyclerView.ViewHolder(v){
@@ -57,6 +55,7 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
                             .addPath("/getStatus")
                             .addBody("{\"uuid\":\"${newList.MQTT_TOPIC}\"}".encodeToByteArray())
                             .build()
+                        Log.i("OPTIONS","{\"uuid\":\"${newList.MQTT_TOPIC}\"}")
 
                         Backend.getStatus(options)
 

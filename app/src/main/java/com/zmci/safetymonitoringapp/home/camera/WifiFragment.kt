@@ -91,6 +91,7 @@ class WifiFragment : Fragment() {
     private fun statusLED() {
         val statusDialog = AlertDialog.Builder(this.requireContext())
 
+        statusDialog.setCancelable(false)
         statusDialog.setTitle("LED Status")
         statusDialog.setIcon(R.drawable.ic_wifi)
         statusDialog.setMessage("Please wait while the device is connecting to the internet.\nWhat is the status of LED?")
