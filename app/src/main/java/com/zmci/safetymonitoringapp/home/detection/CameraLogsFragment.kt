@@ -120,7 +120,7 @@ class CameraLogsFragment : Fragment() {
                 savedMinuteStart = minute
                 savedHourStartPad = savedHourStart.toString().padStart(2,'0')
                 savedMinuteStartPad = savedMinuteStart.toString().padStart(2,'0')
-                startDatetime.text = "$savedYearStart-$savedMonthStartPad-$savedDayStartPad _ $savedHourStartPad-$savedMinuteStartPad"
+                startDatetime.text = "$savedYearStart-$savedMonthStartPad-$savedDayStartPad $savedHourStartPad:$savedMinuteStartPad:00"
             },hour,minute,true)
             tpd.show()
             dpd.show()
@@ -140,7 +140,7 @@ class CameraLogsFragment : Fragment() {
                 savedMinuteEnd = minute
                 savedHourEndPad = savedHourEnd.toString().padStart(2,'0')
                 savedMinuteEndPad = savedMinuteEnd.toString().padStart(2,'0')
-                endDatetime.text = "$savedYearEnd-$savedMonthEndPad-$savedDayEndPad _ $savedHourEndPad-$savedMinuteEndPad"
+                endDatetime.text = "$savedYearEnd-$savedMonthEndPad-$savedDayEndPad $savedHourEndPad:$savedMinuteEndPad:00"
             },hour,minute,true)
             tpd.show()
             dpd.show()
@@ -152,10 +152,15 @@ class CameraLogsFragment : Fragment() {
                     .addPath("/getLogs")
                     .addBody(("{" +
                         "\"uuid\":\"$topic\"," +
-                        "\"start_datetime\":\"$savedYearStart-$savedMonthStartPad-$savedDayStartPad" + "_" + "$savedHourStartPad-$savedMinuteStartPad-00\"," +
-                        "\"end_datetime\":\"$savedYearEnd-$savedMonthEndPad-$savedDayEndPad" + "_" + "$savedHourEndPad-$savedMinuteEndPad-00\"" +
+                        "\"start_datetime\":\"$savedYearStart-$savedMonthStartPad-$savedDayStartPad" + " " + "$savedHourStartPad:$savedMinuteStartPad:00\"," +
+                        "\"end_datetime\":\"$savedYearEnd-$savedMonthEndPad-$savedDayEndPad" + " " + "$savedHourEndPad:$savedMinuteEndPad:00\"" +
                         "}").encodeToByteArray())
                     .build()
+                Log.i("getLogs", "{" +
+                        "\"uuid\":\"$topic\"," +
+                        "\"start_datetime\":\"$savedYearStart-$savedMonthStartPad-$savedDayStartPad" + " " + "$savedHourStartPad:$savedMinuteStartPad:00\"," +
+                        "\"end_datetime\":\"$savedYearEnd-$savedMonthEndPad-$savedDayEndPad" + " " + "$savedHourEndPad:$savedMinuteEndPad:00\"" +
+                        "}")
                 val detectionList = ArrayList<Detection>()
                 Amplify.API.post(options,
                     { Log.i("MyAmplifyApp", "POST succeeded: ${it.data.asString()}")
