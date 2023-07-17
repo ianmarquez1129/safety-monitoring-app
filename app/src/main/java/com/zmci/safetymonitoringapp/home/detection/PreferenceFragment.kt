@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.kusu.loadingbutton.LoadingButton
@@ -238,6 +239,7 @@ class PreferenceFragment : Fragment() {
                                         val msg =
                                             "Publish message: $newPreferences to topic: $setTopic"
                                         Log.d(this.javaClass.name, msg)
+                                        Toast.makeText(context,"Success", Toast.LENGTH_LONG).show()
                                     }
 
                                     override fun onFailure(
@@ -248,6 +250,7 @@ class PreferenceFragment : Fragment() {
                                             this.javaClass.name,
                                             "Failed to publish message to topic"
                                         )
+                                        Toast.makeText(context,"Failed", Toast.LENGTH_LONG).show()
                                     }
                                 })
                         } else {
