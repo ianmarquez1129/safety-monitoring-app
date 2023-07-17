@@ -11,7 +11,7 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +23,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.amplifyframework.core.Amplify
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.databinding.FragmentDetectionReportBinding
 import com.zmci.safetymonitoringapp.home.detection.utils.DETECTION_CAMERA_NAME_KEY
@@ -32,6 +33,7 @@ import com.zmci.safetymonitoringapp.home.detection.utils.DETECTION_VIOLATORS_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.TOTAL_VIOLATIONS_KEY
 import com.zmci.safetymonitoringapp.home.detection.utils.TOTAL_VIOLATORS_KEY
 import org.json.JSONArray
+import java.io.File
 
 class DetectionReportFragment : Fragment() {
 
@@ -43,6 +45,8 @@ class DetectionReportFragment : Fragment() {
 
     private lateinit var expandedImage : ImageView
     private lateinit var container : FrameLayout
+
+    private lateinit var s3bitmap : Bitmap
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,13 +82,24 @@ class DetectionReportFragment : Fragment() {
         val total_violators = arguments?.getString(TOTAL_VIOLATORS_KEY).toString()
 
         //decode base64 to image
-        val decodedByte = Base64.decode(image, Base64.DEFAULT)
-        val bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.size)
-        imageReport.setImageBitmap(bitmap)
+//        val decodedByte = Base64.decode(image, Base64.DEFAULT)
+//        val bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.size)
+//        imageReport.setImageBitmap(bitmap)
+
+        val s3Uri = "images/devices/ZMCI1/ZMCI_2023-07-16_20-30-00/ZMCI_2023-07-16-20-30-00.jpg"
+        val file = File(requireContext().cacheDir, image)
+        Amplify.Storage.downloadFile(image, file,
+            {
+                Log.i("MyAmplifyApp", "Successfully downloaded: ${it.file.name}")
+                s3bitmap = BitmapFactory.decodeFile(it.file.path)
+                imageReport.setImageBitmap(s3bitmap)
+            },
+            { Log.e("MyAmplifyApp",  "Download Failure", it) }
+        )
 
         //expandable image on click
         imageReport.setOnClickListener {
-            zoomImageFromThumb(thumbView = imageReport,bitmap)
+            zoomImageFromThumb(thumbView = imageReport,s3bitmap)
         }
         shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime)
 

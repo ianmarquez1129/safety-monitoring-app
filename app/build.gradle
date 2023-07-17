@@ -61,6 +61,7 @@ dependencies {
     implementation 'com.amplifyframework:core:2.8.7'
     implementation 'com.amplifyframework:aws-auth-cognito:2.8.7'
     implementation 'com.amplifyframework:aws-api:2.8.7'
+    implementation 'com.amplifyframework:aws-storage-s3:2.8.7'
 
     //Loading button
     implementation 'com.github.koushikcse:LoadingButton:1.7'

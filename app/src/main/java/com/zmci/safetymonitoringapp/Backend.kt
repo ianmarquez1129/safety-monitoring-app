@@ -17,7 +17,7 @@ import com.amplifyframework.core.AmplifyConfiguration
 import com.amplifyframework.core.InitializationStatus
 import com.amplifyframework.hub.HubChannel
 import com.amplifyframework.hub.HubEvent
-import com.zmci.safetymonitoringapp.home.HomeFragment
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin
 import org.json.JSONArray
 
 object Backend {
@@ -28,6 +28,7 @@ object Backend {
         try {
             Amplify.addPlugin(AWSApiPlugin())
             Amplify.addPlugin(AWSCognitoAuthPlugin())
+            Amplify.addPlugin(AWSS3StoragePlugin())
             val config = AmplifyConfiguration.builder(applicationContext).devMenuEnabled(false).build()
             Amplify.configure(config, applicationContext)
 
