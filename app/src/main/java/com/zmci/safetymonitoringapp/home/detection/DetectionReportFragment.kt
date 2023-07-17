@@ -86,7 +86,10 @@ class DetectionReportFragment : Fragment() {
 //        val bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.size)
 //        imageReport.setImageBitmap(bitmap)
 
-        val s3Uri = "images/devices/ZMCI1/ZMCI_2023-07-16_20-30-00/ZMCI_2023-07-16-20-30-00.jpg"
+        //Error handling for ImageButton using bitmap
+        val bitmapHandling = BitmapFactory.decodeResource(resources,R.drawable.undraw_organize_photos)
+        s3bitmap = bitmapHandling
+
         val file = File(requireContext().cacheDir, image)
         Amplify.Storage.downloadFile(image, file,
             {
