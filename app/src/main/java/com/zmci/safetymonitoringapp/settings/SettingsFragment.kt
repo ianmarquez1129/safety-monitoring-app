@@ -43,6 +43,11 @@ class SettingsFragment : Fragment() {
         val buttonTutorial = view.findViewById<Button>(R.id.buttonTutorial)
         val buttonLogout = view.findViewById<Button>(R.id.buttonLogout)
         val buttonPrivacy = view.findViewById<Button>(R.id.buttonPrivacy)
+        val buttonTerms = view.findViewById<Button>(R.id.buttonTerms)
+
+        buttonTerms.setOnClickListener {
+            view.findNavController().navigate(R.id.action_navigation_settings_to_fragment_terms)
+        }
 
         buttonPrivacy.setOnClickListener {
             view.findNavController().navigate(R.id.action_navigation_settings_to_fragment_privacy)

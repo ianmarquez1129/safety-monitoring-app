@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_navigation_settings_to_fragment_privacy"
             app:destination="@id/fragment_privacy" />
+        <action
+            android:id="@+id/action_navigation_settings_to_fragment_terms"
+            app:destination="@id/fragment_terms" />
     </fragment>
 
     <fragment
@@ -129,5 +132,11 @@
         android:name="com.zmci.safetymonitoringapp.home.detection.PreferenceFragment"
         android:label="Set Preferences"
         tools:layout="@layout/fragment_preference" />
+
+    <fragment
+        android:id="@+id/fragment_terms"
+        android:name="com.zmci.safetymonitoringapp.settings.TermsFragment"
+        android:label="Terms of Use"
+        tools:layout="@layout/fragment_terms" />
 
 </navigation>

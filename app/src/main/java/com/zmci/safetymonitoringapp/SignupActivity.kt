@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.kusu.loadingbutton.LoadingButton
 import com.zmci.safetymonitoringapp.databinding.ActivitySignupBinding
 import com.zmci.safetymonitoringapp.settings.PrivacyActivity
+import com.zmci.safetymonitoringapp.settings.TermsActivity
 import java.util.regex.Pattern
 
 class SignupActivity : AppCompatActivity() {
@@ -27,6 +28,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var registerEmail : EditText
     private lateinit var registerPassword : EditText
     private lateinit var textViewPrivacy : TextView
+    private lateinit var textViewTerms : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,6 +40,12 @@ class SignupActivity : AppCompatActivity() {
         registerEmail = findViewById(R.id.registerEmail)
         registerPassword = findViewById(R.id.registerPassword)
         textViewPrivacy = findViewById(R.id.textViewPrivacy)
+        textViewTerms = findViewById(R.id.textViewTerms)
+
+        textViewTerms.setOnClickListener {
+            val i = Intent(this,TermsActivity::class.java)
+            startActivity(i)
+        }
 
         textViewPrivacy.setOnClickListener {
             val i = Intent(this, PrivacyActivity::class.java)
