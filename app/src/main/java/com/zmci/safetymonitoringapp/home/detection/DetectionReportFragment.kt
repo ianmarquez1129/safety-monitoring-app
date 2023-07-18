@@ -86,10 +86,6 @@ class DetectionReportFragment : Fragment() {
 //        val bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.size)
 //        imageReport.setImageBitmap(bitmap)
 
-        //Error handling for ImageButton using bitmap
-        val bitmapHandling = BitmapFactory.decodeResource(resources,R.drawable.undraw_organize_photos)
-        s3bitmap = bitmapHandling
-
         val file = File(requireContext().cacheDir, image)
         Amplify.Storage.downloadFile(image, file,
             {

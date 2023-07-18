@@ -27,7 +27,6 @@ import com.amplifyframework.core.Amplify
 import com.google.android.material.snackbar.Snackbar
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.UserData
-import com.zmci.safetymonitoringapp.database.DatabaseHelper
 import com.zmci.safetymonitoringapp.databinding.FragmentLogsBinding
 import com.zmci.safetymonitoringapp.home.detection.adapter.DetectionAdapter
 import com.zmci.safetymonitoringapp.home.detection.model.Detection
@@ -46,10 +45,6 @@ class LogsFragment : Fragment() {
     private val binding by lazy { _binding!! }
 
     private lateinit var detectionAdapter: DetectionAdapter
-
-    companion object {
-        lateinit var databaseHelper: DatabaseHelper
-    }
 
     private lateinit var startDatetime : TextView
 
@@ -70,11 +65,6 @@ class LogsFragment : Fragment() {
     var savedDayStartPad = "01"
     var savedHourStartPad = "00"
     var savedMinuteStartPad = "00"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        databaseHelper = DatabaseHelper(this.requireContext())
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
