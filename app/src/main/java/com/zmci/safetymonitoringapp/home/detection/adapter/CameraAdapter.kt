@@ -49,32 +49,6 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
             popupMenus.inflate(R.menu.show_menu)
             popupMenus.setOnMenuItemClickListener {
                 when(it.itemId){
-                    R.id.refresh->{
-                        val newList = cameraList[adapterPosition]
-                        val options = RestOptions.builder()
-                            .addPath("/getStatus")
-                            .addBody("{\"uuid\":\"${newList.MQTT_TOPIC}\"}".encodeToByteArray())
-                            .build()
-                        Log.i("OPTIONS","{\"uuid\":\"${newList.MQTT_TOPIC}\"}")
-
-                        Backend.getStatus(options)
-
-                        UserData.deviceStatus.observe(c as LifecycleOwner, Observer<String>{deviceStatus ->
-                            val isUpdate = HomeFragment.databaseHelper.updateDeviceStatus(
-                                newList.id.toString(),
-                                deviceStatus
-                            )
-                            if (isUpdate) {
-                                cameraList[adapterPosition].deviceStatus =
-                                    deviceStatus
-                                notifyDataSetChanged()
-                            } else {
-                                Log.i("Error", "Error updating")
-                            }
-                        })
-
-                        true
-                    }
                     R.id.viewLogs->{
                         val newList = cameraList[adapterPosition]
                         position.cameraName = newList.cameraName

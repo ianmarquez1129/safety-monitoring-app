@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import aws.smithy.kotlin.runtime.util.length
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.core.Amplify
 import com.github.mikephil.charting.animation.Easing
@@ -31,6 +32,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.UserData
 import com.zmci.safetymonitoringapp.database.DatabaseHelper
@@ -61,6 +63,7 @@ class HomeFragment : Fragment() {
 
     private val STORAGE_REQUEST_CODE_EXPORT = 1
     private lateinit var storagePermission:Array<String>
+    private lateinit var recv : RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +88,21 @@ class HomeFragment : Fragment() {
 
         val addingBtn = view.findViewById<FloatingActionButton>(R.id.addingBtn)
         val generatePDF = view.findViewById<FloatingActionButton>(R.id.generatePDF)
+        val refresh = view.findViewById<FloatingActionButton>(R.id.refresh)
+
+        val cameraList = databaseHelper.getAllCamera(requireContext())
+
+        refresh.setOnClickListener {
+            for (i in 0 until cameraList.length){
+                val options = RestOptions.builder()
+                    .addPath("/getStatus")
+                    .addBody("{\"uuid\":\"${cameraList[i].MQTT_TOPIC}\"}".encodeToByteArray())
+                    .build()
+                Log.i("OPTIONS","{\"uuid\":\"${cameraList[i].MQTT_TOPIC}\"}")
+                Backend.getStatus(options)
+            }
+            cameraAdapter.notifyDataSetChanged()
+        }
 
         generatePDF.setOnClickListener {
             exportPDF()
@@ -96,11 +114,31 @@ class HomeFragment : Fragment() {
 
         try {
             //RecyclerView
-            //set List
-            val cameraList = databaseHelper.getAllCamera(requireContext())
             cameraAdapter = CameraAdapter(requireContext(), cameraList)
+            for (i in 0 until cameraList.length){
+
+                val options = RestOptions.builder()
+                    .addPath("/getStatus")
+                    .addBody("{\"uuid\":\"${cameraList[i].MQTT_TOPIC}\"}".encodeToByteArray())
+                    .build()
+                Log.i("OPTIONS","{\"uuid\":\"${cameraList[i].MQTT_TOPIC}\"}")
+                Backend.getStatus(options)
+
+                UserData.deviceStatus.observe(viewLifecycleOwner, Observer<String>{ deviceStatus ->
+                    val isUpdate = databaseHelper.updateDeviceStatus(
+                        cameraList[i].id.toString(), deviceStatus
+                    )
+                    if (isUpdate) {
+                        cameraList[i].deviceStatus = deviceStatus
+                        cameraAdapter.notifyDataSetChanged()
+                    } else {
+                        Log.i("Error", "Error updating")
+                    }
+                })
+
+            }
             //set find Id
-            val recv: RecyclerView = view.findViewById(R.id.mRecycler)
+            recv = view.findViewById(R.id.mRecycler)
             //set recycler view adapter
             recv.layoutManager = LinearLayoutManager(this.context)
             recv.adapter = cameraAdapter
