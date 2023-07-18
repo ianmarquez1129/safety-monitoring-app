@@ -59,21 +59,20 @@ class CameraAdapter(val c: Context, val cameraList:MutableList<CameraData>): Rec
 
                         Backend.getStatus(options)
 
-                        var status = ""
                         UserData.deviceStatus.observe(c as LifecycleOwner, Observer<String>{deviceStatus ->
-                            status = deviceStatus
+                            val isUpdate = HomeFragment.databaseHelper.updateDeviceStatus(
+                                newList.id.toString(),
+                                deviceStatus
+                            )
+                            if (isUpdate) {
+                                cameraList[adapterPosition].deviceStatus =
+                                    deviceStatus
+                                notifyDataSetChanged()
+                            } else {
+                                Log.i("Error", "Error updating")
+                            }
                         })
-                        val isUpdate = HomeFragment.databaseHelper.updateDeviceStatus(
-                            newList.id.toString(),
-                            status
-                        )
-                        if (isUpdate) {
-                            cameraList[adapterPosition].deviceStatus =
-                                status
-                            notifyDataSetChanged()
-                        } else {
-                            Log.i("Error", "Error updating")
-                        }
+
                         true
                     }
                     R.id.viewLogs->{
