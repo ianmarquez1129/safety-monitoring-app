@@ -96,6 +96,7 @@ class CameraLogsFragment : Fragment() {
         startDatetime = view.findViewById(R.id.startDatetime)
         val datetimeSubmit = view.findViewById<Button>(R.id.datetimeSubmit)
         val numberEntries = view.findViewById<EditText>(R.id.numberEntries)
+        val numberLogs = view.findViewById<TextView>(R.id.numberLogs)
 
         numberEntries.filters = arrayOf<InputFilter>(MinMaxFilter(1,100))
 
@@ -222,8 +223,10 @@ class CameraLogsFragment : Fragment() {
                                     )
                                 }
                             })
+                            numberLogs.text = "Logs: ${detectionAdapter.itemCount}"
 
                         })
+
 
                 } catch (e: Exception) {
                     e.printStackTrace()

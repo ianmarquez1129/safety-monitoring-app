@@ -1,5 +1,6 @@
 package com.zmci.safetymonitoringapp.home
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -49,8 +51,12 @@ class HomeFragment : Fragment() {
     private val binding by lazy { _binding!! }
     companion object {
         lateinit var databaseHelper: DatabaseHelper
+        @SuppressLint("StaticFieldLeak")
+        lateinit var cameraAdapter: CameraAdapter
+        @SuppressLint("StaticFieldLeak")
+        lateinit var numberDevices: TextView
     }
-    private lateinit var cameraAdapter: CameraAdapter
+
     private lateinit var ourLineChart: LineChart
 
     private val STORAGE_REQUEST_CODE_EXPORT = 1
@@ -119,6 +125,8 @@ class HomeFragment : Fragment() {
                     )
                 }
             })
+            numberDevices = view.findViewById(R.id.numberDevices)
+            numberDevices.text = "Devices: ${adapter.itemCount}"
         } catch (e : Exception) {
             e.printStackTrace()
         }
