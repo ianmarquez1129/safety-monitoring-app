@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Terms of Use"
+                    android:text="Terms of Agreement"
                     android:textSize="28sp"
                     android:textStyle="bold|italic"
                     android:textColor="@color/warm_black"
@@ -62,67 +62,22 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/warm_black"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:text="@string/introduction_1"
-                android:textSize="16sp"
+                android:justificationMode="inter_word"
+                android:text="@string/terms_introduction"
                 android:textColor="@color/warm_black"
-                android:justificationMode="inter_word"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/definitions"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/definitions_1"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/definitions_2"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/definitions_3"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/definitions_4"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/acceptance_of_terms"
+                android:text="@string/user_representation"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
@@ -135,7 +90,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:text="@string/acceptance_of_terms_1"
+                android:text="@string/user_representation_1"
                 android:textSize="16sp"
                 android:textColor="@color/warm_black"
                 android:justificationMode="inter_word"/>
@@ -143,7 +98,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/scope_of_use"
+                android:text="@string/subscription_and_services"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
@@ -156,7 +111,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:text="@string/scope_of_use_1"
+                android:text="@string/subscription_and_services_1"
                 android:textSize="16sp"
                 android:textColor="@color/warm_black"
                 android:justificationMode="inter_word"/>
@@ -164,7 +119,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/account_registration"
+                android:text="@string/data_handling_and_privacy"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
@@ -177,14 +132,14 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:text="@string/account_registration_1"
+                android:text="@string/data_handling_and_privacy_1"
                 android:textSize="16sp"
                 android:textColor="@color/warm_black"
                 android:justificationMode="inter_word"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/authorized_use"
+                android:text="@string/consent_and_notice"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
@@ -197,106 +152,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:text="@string/authorized_use_1"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"
-                android:justificationMode="inter_word"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_obligations"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/user_obligations_1"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"
-                android:justificationMode="inter_word"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/user_obligations_2"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/user_obligations_3"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/user_obligations_4"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/user_obligations_5"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/intellectual_property"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/intellectual_property_1"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"
-                android:justificationMode="inter_word"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/privacy_and_data_protection"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/privacy_and_data_protection_1"
+                android:text="@string/consent_and_notice_1"
                 android:textSize="16sp"
                 android:textColor="@color/warm_black"
                 android:justificationMode="inter_word"/>
@@ -325,6 +181,48 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/employee_training_and_awareness"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/warm_black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/employee_training_and_awareness_1"
+                android:textSize="16sp"
+                android:textColor="@color/warm_black"
+                android:justificationMode="inter_word"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/indemnification"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/warm_black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/indemnification_1"
+                android:textSize="16sp"
+                android:textColor="@color/warm_black"
+                android:justificationMode="inter_word"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/termination"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="24dp"
@@ -346,7 +244,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/limitation_of_liability"
+                android:text="@string/governing_law_and_jurisdiction"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
@@ -359,49 +257,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:text="@string/limitation_of_liability_1"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"
-                android:justificationMode="inter_word"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/governing_law_and_dispute_resolution"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/governing_law_and_dispute_resolution_1"
-                android:textSize="16sp"
-                android:textColor="@color/warm_black"
-                android:justificationMode="inter_word"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/amendments"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/warm_black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/amendments_1"
+                android:text="@string/governing_law_and_jurisdiction_1"
                 android:textSize="16sp"
                 android:textColor="@color/warm_black"
                 android:justificationMode="inter_word"/>
