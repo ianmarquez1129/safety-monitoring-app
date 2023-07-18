@@ -33,27 +33,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Set Date and Time"
-        android:textColor="@color/warm_black"
+        android:textColor="@color/hyperlink"
         android:layout_marginStart="50dp"
         android:textSize="18sp"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set ending Date and Time"
-        android:textColor="@color/dark_gray"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="24dp"
-        android:textSize="18sp"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set entries (Max 100):"
+            android:textColor="@color/dark_gray"
+            android:layout_marginStart="24dp"
+            android:textSize="18sp"/>
 
-    <TextView
-        android:id="@+id/endDatetime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Set Date and Time"
-        android:textColor="@color/warm_black"
-        android:layout_marginStart="50dp"
-        android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/numberEntries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginEnd="24dp"
+            android:hint="e.g. 20"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="#707070"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/datetimeSubmit"

@@ -1,25 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".logs.LogsFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set starting Date and Time"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/dark_gray"
+        android:layout_marginStart="24dp"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/startDatetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Date and Time"
+        android:textColor="@color/hyperlink"
+        android:layout_marginStart="50dp"
+        android:textSize="18sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set entries (Max 100):"
+            android:textColor="@color/dark_gray"
+            android:layout_marginStart="24dp"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/numberEntries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginEnd="24dp"
+            android:hint="e.g. 20"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="#707070"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/datetimeSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/green"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
 
     <!-- recycler view to display our data -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDetection"
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/btnDeleteAll"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_margin="15dp"-->
-<!--        android:src="@drawable/ic_delete"-->
-<!--        app:tint="@color/dark_gray"-->
-<!--        app:backgroundTint="#d3d3d3"/>-->
-</RelativeLayout>
+</LinearLayout>

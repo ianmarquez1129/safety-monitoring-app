@@ -228,18 +228,18 @@ class HomeFragment : Fragment() {
             .build()
         val detectionList = ArrayList<Detection>()
         Amplify.API.get(request,
-            { Log.i("MyAmplifyApp", "GET succeeded: ${it.data.asString()}")
+            { Log.i("getLogs", "GET succeeded: ${it.data.asString()}")
                 try {
                     val data = JSONArray(it.data.asString())
                     for (i in 0 until data.length()) {
                         val detection = Detection()
                         val item = data.getJSONObject(i)
                         detection.id = i
-                        detection.image = item.getString("image")
-                        detection.cameraName = item.getString("uuid")
-                        detection.timestamp = item.getString("timestamp")
-                        detection.violators = item.getString("violators")
-                        detection.total_violators = item.getString("total_violators")
+                        detection.image = "image"
+                        detection.cameraName = "uuid"
+                        detection.timestamp = "timestamp"
+                        detection.violators = "violators"
+                        detection.total_violators = "total_violators"
                         detection.total_violations = item.getString("total_violations")
                         detectionList.add(detection)
                     }
@@ -256,7 +256,7 @@ class HomeFragment : Fragment() {
                 }
 
             },
-            { Log.e("MyAmplifyApp", "GET failed.", it) }
+            { Log.e("getLogs", "GET failed.", it) }
         )
 
         UserData.chart.observe(this.viewLifecycleOwner, Observer<Array<Int>> { chart ->
