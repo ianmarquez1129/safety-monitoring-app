@@ -26,8 +26,8 @@ object UserData {
     private val _deviceLogs = MutableLiveData<ArrayList<Detection>>()
     var deviceLogs : LiveData<ArrayList<Detection>> = _deviceLogs
 
-    private val _deviceStatus = MutableLiveData<String>()
-    var deviceStatus : LiveData<String> = _deviceStatus
+    private val _deviceStatus = MutableLiveData<ArrayList<HashMap<String,String>>>()
+    var deviceStatus : LiveData<ArrayList<HashMap<String,String>>> = _deviceStatus
 
     fun setSignedIn(newValue : Boolean) {
         // use postvalue() to make the assignation on the main (UI) thread
@@ -53,7 +53,7 @@ object UserData {
         _deviceLogs.postValue(newValue)
     }
 
-    fun setDeviceStatus(newValue: String) {
+    fun setDeviceStatus(newValue: ArrayList<HashMap<String,String>>) {
         _deviceStatus.postValue(newValue)
     }
 

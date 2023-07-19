@@ -32,6 +32,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.R
 import com.zmci.safetymonitoringapp.UserData
@@ -64,6 +65,7 @@ class HomeFragment : Fragment() {
     private val STORAGE_REQUEST_CODE_EXPORT = 1
     private lateinit var storagePermission:Array<String>
     private lateinit var recv : RecyclerView
+    private lateinit var realtimeUpdate: RealtimeUpdate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,21 +90,8 @@ class HomeFragment : Fragment() {
 
         val addingBtn = view.findViewById<FloatingActionButton>(R.id.addingBtn)
         val generatePDF = view.findViewById<FloatingActionButton>(R.id.generatePDF)
-        val refresh = view.findViewById<FloatingActionButton>(R.id.refresh)
 
         val cameraList = databaseHelper.getAllCamera(requireContext())
-
-        refresh.setOnClickListener {
-            for (i in 0 until cameraList.length){
-                val options = RestOptions.builder()
-                    .addPath("/getStatus")
-                    .addBody("{\"uuid\":\"${cameraList[i].MQTT_TOPIC}\"}".encodeToByteArray())
-                    .build()
-                Log.i("OPTIONS","{\"uuid\":\"${cameraList[i].MQTT_TOPIC}\"}")
-                Backend.getStatus(options)
-            }
-            cameraAdapter.notifyDataSetChanged()
-        }
 
         generatePDF.setOnClickListener {
             exportPDF()
@@ -115,28 +104,57 @@ class HomeFragment : Fragment() {
         try {
             //RecyclerView
             cameraAdapter = CameraAdapter(requireContext(), cameraList)
+
+            // Observer for Device Status
             for (i in 0 until cameraList.length){
+                UserData.deviceStatus.observe(viewLifecycleOwner, Observer<ArrayList<HashMap<String,String>>>{ deviceStatus ->
+                    try {
+                        for (j in 0 until deviceStatus.length){
+                            if (deviceStatus[j][cameraList[i].MQTT_TOPIC].isNullOrEmpty()){
+                                Log.i("empty", deviceStatus[j][cameraList[i].MQTT_TOPIC].toString())
 
-                val options = RestOptions.builder()
-                    .addPath("/getStatus")
-                    .addBody("{\"uuid\":\"${cameraList[i].MQTT_TOPIC}\"}".encodeToByteArray())
-                    .build()
-                Log.i("OPTIONS","{\"uuid\":\"${cameraList[i].MQTT_TOPIC}\"}")
-                Backend.getStatus(options)
+                            } else {
+                                val isUpdate =
+                                    databaseHelper.updateDeviceStatusByUUID(
+                                        cameraList[i].MQTT_TOPIC,
+                                        deviceStatus[j][cameraList[i].MQTT_TOPIC].toString()
+                                    )
 
-                UserData.deviceStatus.observe(viewLifecycleOwner, Observer<String>{ deviceStatus ->
-                    val isUpdate = databaseHelper.updateDeviceStatus(
-                        cameraList[i].id.toString(), deviceStatus
-                    )
-                    if (isUpdate) {
-                        cameraList[i].deviceStatus = deviceStatus
-                        cameraAdapter.notifyDataSetChanged()
-                    } else {
-                        Log.i("Error", "Error updating")
+                                Log.i(
+                                    cameraList[i].MQTT_TOPIC,
+                                    deviceStatus[j][cameraList[i].MQTT_TOPIC].toString()
+                                )
+                                if (isUpdate) {
+                                    cameraList[i].deviceStatus =
+                                        deviceStatus[j][cameraList[i].MQTT_TOPIC].toString()
+                                    cameraAdapter.notifyDataSetChanged()
+                                } else {
+                                    Log.i("Error", "Error updating")
+                                }
+                            }
+                        }
+
+                    } catch (e:Exception) {
+                        e.printStackTrace()
                     }
                 })
-
             }
+            // Real time update for Device Status
+            realtimeUpdate = RealtimeUpdate(5000) {
+                val listUUID : ArrayList<HashMap<String,String>> = arrayListOf()
+                for (i in 0 until cameraList.length) {
+                    listUUID.add(hashMapOf(Pair("uuid",cameraList[i].MQTT_TOPIC)))
+                }
+                val uuidList = Gson().toJson(listUUID).toString()
+                val options = RestOptions.builder()
+                    .addPath("/getStatus")
+                    .addBody(uuidList.encodeToByteArray())
+                    .build()
+                Log.i("OPTIONS", uuidList)
+                Backend.getStatus(options)
+            }
+            realtimeUpdate.startPolling()
+
             //set find Id
             recv = view.findViewById(R.id.mRecycler)
             //set recycler view adapter
@@ -343,6 +361,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        realtimeUpdate.stopPolling()
         _binding = null
     }
 }

@@ -144,6 +144,26 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     /**
+     * This method to update camera record
+     *
+     * @param camera
+     */
+    fun updateDeviceStatusByUUID(uuid : String, deviceStatus: String) : Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        var result: Boolean
+        values.put(COLUMN_DEVICE_STATUS, deviceStatus)
+        try {
+            db.update(TABLE_CAMERA, values, "$COLUMN_SERVER_TOPIC = ?", arrayOf(uuid))
+            result = true
+        } catch (e : Exception){
+            Log.e(ContentValues.TAG, "Error Updating")
+            result = false
+        }
+        return result
+    }
+
+    /**
      * This method is to delete camera record
      *
      * @param camera

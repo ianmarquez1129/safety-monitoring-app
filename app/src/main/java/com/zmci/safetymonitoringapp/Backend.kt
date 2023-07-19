@@ -186,16 +186,24 @@ object Backend {
     }
 
     fun getStatus(options: RestOptions) {
+        val detectionList = ArrayList<HashMap<String,String>>()
         Amplify.API.post(options,
-            { Log.i("MyAmplifyApp", "POST succeeded: ${it.data.asString()}")
-                val data = JSONArray(it.data.asString())
-                for (i in 0 until data.length()) {
-                    val item = data.getJSONObject(i)
-                    val status = item.getString("status")
-                    UserData.setDeviceStatus(status)
+            { Log.i("getStatus", "POST succeeded: ${it.data.asString()}")
+                try {
+                    val data = JSONArray(it.data.asString())
+                    for (i in 0 until data.length()) {
+                        val item = data.getJSONObject(i)
+                        val uuid = item.getString("uuid")
+                        val status = item.getString("status")
+                        detectionList.add(hashMapOf(Pair(uuid, status)))
+                    }
+                    UserData.setDeviceStatus(detectionList)
+                    Log.i("pair",detectionList.toString())
+                } catch (e:Exception){
+                    e.printStackTrace()
                 }
             },
-            { Log.e("MyAmplifyApp", "POST failed", it) }
+            { Log.e("getStatus", "POST failed", it) }
         )
     }
 
