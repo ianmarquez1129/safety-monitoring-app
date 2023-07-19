@@ -45,7 +45,6 @@ class LoginActivity : AppCompatActivity() {
         password = findViewById(R.id.editTextPassword)
 
         buttonLogin.setOnClickListener{
-            buttonLogin.showLoading()
             if (username.text.toString().isEmpty() || password.text.toString().isEmpty()){
                 buttonLogin.hideLoading()
                 val snackBarView = Snackbar.make(binding.root, R.string.fill_out_empty_fields , Snackbar.LENGTH_LONG)
@@ -56,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 snackBarView.setBackgroundTint(Color.RED)
                 snackBarView.show()
             } else {
+                buttonLogin.showLoading()
                 Amplify.Auth.signIn(username.text.toString(), password.text.toString(),
                     { result ->
                         if (result.isSignedIn) {

@@ -30,7 +30,6 @@ class ConfirmActivity : AppCompatActivity() {
         button = findViewById(R.id.buttonVerify)
 
         button.setOnClickListener {
-            button.showLoading()
             if (editText.text.toString().isEmpty()){
                 button.hideLoading()
                 val snackBarView = Snackbar.make(binding.root, R.string.fill_out_empty_fields , Snackbar.LENGTH_LONG)
@@ -41,6 +40,7 @@ class ConfirmActivity : AppCompatActivity() {
                 snackBarView.setBackgroundTint(Color.RED)
                 snackBarView.show()
             } else {
+                button.showLoading()
                 Amplify.Auth.confirmSignUp(
                     username, editText.text.toString(),
                     { result ->

@@ -47,7 +47,6 @@ class WifiFragment : Fragment() {
         //initialize load of web
 
         buttonPost.setOnClickListener {
-            buttonPost.showLoading()
             if (networkSSID.text.toString().isEmpty())
             {
                 buttonPost.hideLoading()
@@ -72,7 +71,6 @@ class WifiFragment : Fragment() {
                             Log.d("Main", response.body().toString())
                             Log.d("Main", response.code().toString())
                             Log.d("Main", response.message())
-                            buttonPost.hideLoading()
                         } else {
 //                            Toast.makeText(activity, response.code(), Toast.LENGTH_SHORT).show()
                             buttonPost.hideLoading()

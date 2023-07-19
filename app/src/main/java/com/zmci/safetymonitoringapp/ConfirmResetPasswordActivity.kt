@@ -35,7 +35,6 @@ class ConfirmResetPasswordActivity : AppCompatActivity() {
         buttonSubmit = findViewById(R.id.buttonSubmit)
 
         buttonSubmit.setOnClickListener {
-            buttonSubmit.showLoading()
             if (confirmationCode.text.toString().isEmpty() || newPassword.text.toString().isEmpty()){
                 buttonSubmit.hideLoading()
                 val snackBarView = Snackbar.make(binding.root, R.string.fill_out_empty_fields , Snackbar.LENGTH_LONG)
@@ -47,6 +46,7 @@ class ConfirmResetPasswordActivity : AppCompatActivity() {
                 snackBarView.show()
             } else {
                 if (isValidPassword(newPassword.text.toString())){
+                    buttonSubmit.showLoading()
                     Amplify.Auth.confirmResetPassword(username, newPassword.text.toString(), confirmationCode.text.toString(),
                         { Log.i("AuthQuickstart", "New password confirmed")
                             buttonSubmit.hideLoading()

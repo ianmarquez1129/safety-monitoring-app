@@ -28,9 +28,7 @@ class AddCameraFragment : Fragment() {
 
         val buttonNext = view.findViewById<LoadingButton>(R.id.buttonNext)
         buttonNext.setOnClickListener {
-            buttonNext.showLoading()
             view.findNavController().navigate(R.id.action_fragment_add_camera_to_fragment_connect_camera)
-            buttonNext.hideLoading()
         }
 
     }

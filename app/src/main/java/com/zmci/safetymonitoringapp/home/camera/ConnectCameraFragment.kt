@@ -35,7 +35,6 @@ class ConnectCameraFragment : Fragment() {
 
         val buttonConnected = view.findViewById<LoadingButton>(R.id.buttonConnected)
         buttonConnected.setOnClickListener {
-            buttonConnected.showLoading()
             try {
                 val repository = Repository()
                 val viewModelFactory = ConnectCameraViewModelFactory(repository)
@@ -47,12 +46,10 @@ class ConnectCameraFragment : Fragment() {
                         Log.d("Main", response.body().toString())
                         Log.d("Main", response.code().toString())
                         Log.d("Main", response.message())
-                        buttonConnected.hideLoading()
                         view.findNavController()
                             .navigate(R.id.action_fragment_connect_camera_to_fragment_wifi)
                     } else {
                         Toast.makeText(activity, response.code(), Toast.LENGTH_SHORT).show()
-                        buttonConnected.hideLoading()
                     }
                 })
             } catch (e:Exception){

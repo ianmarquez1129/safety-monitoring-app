@@ -115,7 +115,6 @@ class PreferenceFragment : Fragment() {
 
 
         buttonSetPreferences.setOnClickListener {
-            buttonSetPreferences.showLoading()
             val idHelmet : Int = helmetGroup.checkedRadioButtonId
             val idGlasses : Int = glassesGroup.checkedRadioButtonId
             val idVest : Int = vestGroup.checkedRadioButtonId
@@ -266,7 +265,6 @@ class PreferenceFragment : Fragment() {
                     Log.i("Helmet", "No radio button active")
                 }
             }
-            buttonSetPreferences.hideLoading()
         }
 
     }

@@ -53,9 +53,7 @@ class CameraCredentialsFragment : Fragment() {
         val buttonCreate = view.findViewById<LoadingButton>(R.id.buttonCreate)
 
         buttonCreate.setOnClickListener {
-            buttonCreate.showLoading()
             if (deviceName.text.toString().isEmpty() || deviceUniqueID.text.toString().isEmpty() || devicePassword.text.toString().isEmpty()) {
-                buttonCreate.hideLoading()
                 val snackBarView = Snackbar.make(binding.root, R.string.fill_out_empty_fields , Snackbar.LENGTH_LONG)
                 val view1 = snackBarView.view
                 val params = view1.layoutParams as FrameLayout.LayoutParams
@@ -78,6 +76,7 @@ class CameraCredentialsFragment : Fragment() {
                             "\"password\":\"${devicePassword.text}\"" +
                             "}")
 
+                    buttonCreate.showLoading()
                     Amplify.API.post(options,
                         {
                             Log.i("MyAmplifyApp", "POST succeeded: ${it.data.asString()}")

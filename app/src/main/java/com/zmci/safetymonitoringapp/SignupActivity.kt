@@ -53,7 +53,6 @@ class SignupActivity : AppCompatActivity() {
         }
 
         buttonSignup.setOnClickListener{
-            buttonSignup.showLoading()
             if (registerUsername.text.toString().isEmpty() || registerEmail.text.toString().isEmpty() || registerPassword.text.toString().isEmpty()){
                 buttonSignup.hideLoading()
                 val snackBarView = Snackbar.make(binding.root, "Fill out empty fields" , Snackbar.LENGTH_LONG)
@@ -65,6 +64,7 @@ class SignupActivity : AppCompatActivity() {
                 snackBarView.show()
             } else {
                 if (isValidPassword(registerPassword.text.toString())) {
+                    buttonSignup.showLoading()
                     val options = AuthSignUpOptions.builder()
                         .userAttribute(AuthUserAttributeKey.email(), registerEmail.text.toString())
                         .build()

@@ -29,7 +29,6 @@ class ResetPasswordActivity : AppCompatActivity() {
         etUsername = findViewById(R.id.etUsername)
         buttonReset = findViewById(R.id.buttonReset)
         buttonReset.setOnClickListener {
-            buttonReset.showLoading()
             if (etUsername.text.toString().isEmpty()){
                 buttonReset.hideLoading()
                 val snackBarView = Snackbar.make(binding.root, R.string.fill_out_empty_fields , Snackbar.LENGTH_LONG)
@@ -40,6 +39,7 @@ class ResetPasswordActivity : AppCompatActivity() {
                 snackBarView.setBackgroundTint(Color.RED)
                 snackBarView.show()
             } else {
+                buttonReset.showLoading()
                 Amplify.Auth.resetPassword(etUsername.text.toString(),
                     { Log.i("AuthQuickstart", "Password reset OK: $it")
                         buttonReset.hideLoading()
