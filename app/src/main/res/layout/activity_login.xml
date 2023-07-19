@@ -72,6 +72,11 @@
             android:textStyle="bold"
             android:textSize="20sp"/>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
@@ -84,6 +89,8 @@
             android:background="@drawable/edittext_background"
             android:inputType="textPassword"
             android:hint="Enter your Password" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvRecoverPW"
