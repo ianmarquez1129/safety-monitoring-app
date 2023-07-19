@@ -49,6 +49,23 @@
                 android:layout_gravity="center"
                 android:src="@drawable/undraw_signal_searching"/>
             <com.kusu.loadingbutton.LoadingButton
+                android:id="@+id/openWifi"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:text="Open WiFi Settings"
+                android:textColor="@color/white"
+                style="@android:style/Widget.Button"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:background="@drawable/button_background"
+                app:lb_buttonColor="@color/green"
+                app:lb_isShadowEnable="true"
+                app:lb_isCircular="true"
+                app:lb_loaderColor="@color/white"
+                app:lb_shadowColor="@color/warm_black"
+                app:lb_shadowHeight="5dp" />
+            <com.kusu.loadingbutton.LoadingButton
                 android:id="@+id/buttonConnected"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

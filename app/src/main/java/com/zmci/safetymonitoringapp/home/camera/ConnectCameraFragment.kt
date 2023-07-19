@@ -1,6 +1,8 @@
 package com.zmci.safetymonitoringapp.home.camera
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +36,11 @@ class ConnectCameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val buttonConnected = view.findViewById<LoadingButton>(R.id.buttonConnected)
+        val openWifi = view.findViewById<LoadingButton>(R.id.openWifi)
+        openWifi.setOnClickListener {
+            val i = Intent(Settings.ACTION_WIFI_SETTINGS)
+            startActivity(i)
+        }
         buttonConnected.setOnClickListener {
             try {
                 val repository = Repository()
