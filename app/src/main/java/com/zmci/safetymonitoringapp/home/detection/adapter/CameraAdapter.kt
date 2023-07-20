@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +13,9 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.amplifyframework.api.rest.RestOptions
-import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.R
-import com.zmci.safetymonitoringapp.UserData
 import com.zmci.safetymonitoringapp.home.HomeFragment
 import com.zmci.safetymonitoringapp.home.detection.model.CameraData
 import com.zmci.safetymonitoringapp.home.detection.utils.CAMERA_NAME_KEY

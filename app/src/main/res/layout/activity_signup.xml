@@ -154,7 +154,7 @@
                     android:id="@+id/textViewPrivacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Privacy Statement"
+                    android:text="Privacy Policy"
                     android:textColor="@color/hyperlink"
                     android:textSize="18sp"/>
                 <TextView
