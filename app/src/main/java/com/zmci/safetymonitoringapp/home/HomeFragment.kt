@@ -3,13 +3,16 @@ package com.zmci.safetymonitoringapp.home
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
 import android.util.Base64
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -32,6 +35,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.zmci.safetymonitoringapp.Backend
 import com.zmci.safetymonitoringapp.R
@@ -257,6 +261,14 @@ class HomeFragment : Fragment() {
             fos.write(decodedBytes)
             fos.flush()
             fos.close()
+            val snackBarView = Snackbar.make(binding.root, "Success! Check 'Download' folder." , Snackbar.LENGTH_LONG)
+            val view = snackBarView.view
+            val params = view.layoutParams as FrameLayout.LayoutParams
+            params.gravity = Gravity.TOP
+            view.layoutParams = params
+            snackBarView.setBackgroundTint(Color.GREEN)
+            snackBarView.show()
+
 
         } catch (e: Exception) {
             Log.e("TAG", "Failed to generate pdf from base64: ${e.localizedMessage}")
